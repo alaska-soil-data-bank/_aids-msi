@@ -88,5 +88,35 @@
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
     ]
+  },
+  {
+    "objectID": "msi-python.html",
+    "href": "msi-python.html",
+    "title": "2  Accessing and Using Python on MSI Resources",
+    "section": "",
+    "text": "2.1 Python in the Terminal\nThe MSI documentation for this is good. In the Python MSI page go to the “Documentation” tab and for general terminal use look at Linux. Here is what I have been doing:\nThen spin up the Python interpreter:\nNow you are ready to code!",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
+    ]
+  },
+  {
+    "objectID": "msi-python.html#python-in-the-terminal",
+    "href": "msi-python.html#python-in-the-terminal",
+    "title": "2  Accessing and Using Python on MSI Resources",
+    "section": "",
+    "text": "module load python3\n#this loads the [Anaconda Python 3 distribution](https://msi.umn.edu/our-resources/msi-software/anaconda) available through MSI\n\nipython",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
+    ]
+  },
+  {
+    "objectID": "msi-python.html#python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine",
+    "href": "msi-python.html#python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine",
+    "title": "2  Accessing and Using Python on MSI Resources",
+    "section": "2.2 Python through Jupyter notebook on an MSI OnDemand Virtual Machine",
+    "text": "2.2 Python through Jupyter notebook on an MSI OnDemand Virtual Machine\nI need to work to understand more why packages and some operations are not loading successfully here. May be because you need to restart the kernel more often or things just aren’t pointing to the right place. #to-do",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
+    ]
   }
 ]
