@@ -1,0 +1,22 @@
+# Working with Docker Images on MSI Resources
+
+## Singularity in place of docker
+
+Due to security concerns, MSI does not allow direct import and use of Docker images. Instead, you need to use Singularity, which, like docker, has a repository of images that can be accessed. These are .SIF files. You can build a .sif from an existing docker image, however. Then you can store it in your home directory.
+
+I used [the "Singularity and Containers" tutorial](https://www.youtube.com/watch?v=uzBIDM_fAwU) (from 2020) to do this. There may be some outdated issues but it seemed to generally work.
+
+## Building an sif file from a docker image
+
+first load singularity
+
+```shell
+module load singularity
+````
+
+then build an sif from a docker image. NOTE: need the docker image pointer. In this example I am using my [docker image]( https://hub.docker.com/layers/nicjelinski/wosis-latest-r-extract/v0.1/images/sha256-f8c4a1a202f7e7125ef11c4ceabc3d9c289e0645d340893481aecd8278d4e9b6?context=repo) which is nicjelinski/wosis-latest-r-extract:v0.1
+
+```shell
+
+singularity run docker://nicjelinski/wosis-latest-r-extract:v0.1
+```

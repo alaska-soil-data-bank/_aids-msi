@@ -30,6 +30,16 @@
     ]
   },
   {
+    "objectID": "msi-systems-access.html#ssh",
+    "href": "msi-systems-access.html#ssh",
+    "title": "1  MSI Systems Access",
+    "section": "",
+    "text": "ssh jeli0026\\@agate.msi.umn.edu\\",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
+    ]
+  },
+  {
     "objectID": "msi-systems-access.html#msi-file-structure-storage-etc",
     "href": "msi-systems-access.html#msi-file-structure-storage-etc",
     "title": "1  MSI Systems Access",
@@ -45,46 +55,6 @@
     "title": "1  MSI Systems Access",
     "section": "1.3 Open On Demand for programmatic work or Jupyter notebook or Rstudio",
     "text": "1.3 Open On Demand for programmatic work or Jupyter notebook or Rstudio\nGo to MSI Open On Demand and spin up a virtual machine (many options). Haven’t explored this much yet. Be sure to leave Notebook Root empty so it defaults to the home directory. #to-do",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
-    ]
-  },
-  {
-    "objectID": "data-transfer-msi.html",
-    "href": "data-transfer-msi.html",
-    "title": "2  Data Transfer to and from MSI compute platform",
-    "section": "",
-    "text": "2.1 Globus\nGlobus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
-    ]
-  },
-  {
-    "objectID": "data-transfer-msi.html#globus",
-    "href": "data-transfer-msi.html#globus",
-    "title": "2  Data Transfer to and from MSI compute platform",
-    "section": "",
-    "text": "2.1.1 Globus: Local Storage to MSI\nI followed these instructions to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.\n\n\n2.1.2 Globus: GEMS to MSI\nI found this tutorial here but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.\nI have a help ticket in to hopefully resolve. #to-do\n\n\n2.1.3 Globus: Box to MSI\nI have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
-    ]
-  },
-  {
-    "objectID": "data-transfer-msi.html#command-line-interface-cli",
-    "href": "data-transfer-msi.html#command-line-interface-cli",
-    "title": "2  Data Transfer to and from MSI compute platform",
-    "section": "2.2 Command Line Interface (CLI)",
-    "text": "2.2 Command Line Interface (CLI)\nThe other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don’t see any possibilities for that in the MSI File Transfer Tutorial here. Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
-    ]
-  },
-  {
-    "objectID": "msi-systems-access.html#ssh",
-    "href": "msi-systems-access.html#ssh",
-    "title": "1  MSI Systems Access",
-    "section": "",
-    "text": "ssh jeli0026\\@agate.msi.umn.edu\\",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
     ]
@@ -117,6 +87,56 @@
     "text": "2.2 Python through Jupyter notebook on an MSI OnDemand Virtual Machine\nI need to work to understand more why packages and some operations are not loading successfully here. May be because you need to restart the kernel more often or things just aren’t pointing to the right place. #to-do",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
+    ]
+  },
+  {
+    "objectID": "data-transfer-msi.html",
+    "href": "data-transfer-msi.html",
+    "title": "3  Data Transfer to and from MSI compute platform",
+    "section": "",
+    "text": "3.1 Globus\nGlobus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+    ]
+  },
+  {
+    "objectID": "data-transfer-msi.html#globus",
+    "href": "data-transfer-msi.html#globus",
+    "title": "3  Data Transfer to and from MSI compute platform",
+    "section": "",
+    "text": "3.1.1 Globus: Local Storage to MSI\nI followed these instructions to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.\n\n\n3.1.2 Globus: GEMS to MSI\nI found this tutorial here but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.\nI have a help ticket in to hopefully resolve. #to-do\n\n\n3.1.3 Globus: Box to MSI\nI have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+    ]
+  },
+  {
+    "objectID": "data-transfer-msi.html#command-line-interface-cli",
+    "href": "data-transfer-msi.html#command-line-interface-cli",
+    "title": "3  Data Transfer to and from MSI compute platform",
+    "section": "3.2 Command Line Interface (CLI)",
+    "text": "3.2 Command Line Interface (CLI)\nThe other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don’t see any possibilities for that in the MSI File Transfer Tutorial here. Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+    ]
+  },
+  {
+    "objectID": "singularity-docker-containers.html",
+    "href": "singularity-docker-containers.html",
+    "title": "4  Working with Docker Images on MSI Resources",
+    "section": "",
+    "text": "4.1 Singularity in place of docker\nDue to security concerns, MSI does not allow direct import and use of Docker images. Instead, you need to use Singularity, which, like docker, has a repository of images that can be accessed. These are .SIF files. You can build a .sif from an existing docker image, however. Then you can store it in your home directory.\nI used the “Singularity and Containers” tutorial (from 2020) to do this. There may be some outdated issues but it seemed to generally work.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Working with Docker Images on MSI Resources</span>"
+    ]
+  },
+  {
+    "objectID": "singularity-docker-containers.html#building-an-sif-file-from-a-docker-image",
+    "href": "singularity-docker-containers.html#building-an-sif-file-from-a-docker-image",
+    "title": "4  Working with Docker Images on MSI Resources",
+    "section": "4.2 Building an sif file from a docker image",
+    "text": "4.2 Building an sif file from a docker image\nfirst load singularity\nmodule load singularity\nthen build an sif from a docker image. NOTE: need the docker image pointer. In this example I am using my docker image which is nicjelinski/wosis-latest-r-extract:v0.1\n\nsingularity run docker://nicjelinski/wosis-latest-r-extract:v0.1",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Working with Docker Images on MSI Resources</span>"
     ]
   }
 ]

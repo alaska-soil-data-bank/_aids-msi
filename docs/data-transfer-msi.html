@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>_aids-msi - 2&nbsp; Data Transfer to and from MSI compute platform</title>
+<title>_aids-msi - 3&nbsp; Data Transfer to and from MSI compute platform</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./msi-systems-access.html" rel="prev">
+<link href="./singularity-docker-containers.html" rel="next">
+<link href="./msi-python.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -80,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-transfer-msi.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-transfer-msi.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -119,8 +120,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./msi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./data-transfer-msi.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./singularity-docker-containers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></span></a>
   </div>
 </li>
     </ul>
@@ -133,13 +146,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#globus" id="toc-globus" class="nav-link active" data-scroll-target="#globus"><span class="header-section-number">2.1</span> Globus</a>
+  <li><a href="#globus" id="toc-globus" class="nav-link active" data-scroll-target="#globus"><span class="header-section-number">3.1</span> Globus</a>
   <ul class="collapse">
-  <li><a href="#globus-local-storage-to-msi" id="toc-globus-local-storage-to-msi" class="nav-link" data-scroll-target="#globus-local-storage-to-msi"><span class="header-section-number">2.1.1</span> Globus: Local Storage to MSI</a></li>
-  <li><a href="#globus-gems-to-msi" id="toc-globus-gems-to-msi" class="nav-link" data-scroll-target="#globus-gems-to-msi"><span class="header-section-number">2.1.2</span> Globus: GEMS to MSI</a></li>
-  <li><a href="#globus-box-to-msi" id="toc-globus-box-to-msi" class="nav-link" data-scroll-target="#globus-box-to-msi"><span class="header-section-number">2.1.3</span> Globus: Box to MSI</a></li>
+  <li><a href="#globus-local-storage-to-msi" id="toc-globus-local-storage-to-msi" class="nav-link" data-scroll-target="#globus-local-storage-to-msi"><span class="header-section-number">3.1.1</span> Globus: Local Storage to MSI</a></li>
+  <li><a href="#globus-gems-to-msi" id="toc-globus-gems-to-msi" class="nav-link" data-scroll-target="#globus-gems-to-msi"><span class="header-section-number">3.1.2</span> Globus: GEMS to MSI</a></li>
+  <li><a href="#globus-box-to-msi" id="toc-globus-box-to-msi" class="nav-link" data-scroll-target="#globus-box-to-msi"><span class="header-section-number">3.1.3</span> Globus: Box to MSI</a></li>
   </ul></li>
-  <li><a href="#command-line-interface-cli" id="toc-command-line-interface-cli" class="nav-link" data-scroll-target="#command-line-interface-cli"><span class="header-section-number">2.2</span> Command Line Interface (CLI)</a></li>
+  <li><a href="#command-line-interface-cli" id="toc-command-line-interface-cli" class="nav-link" data-scroll-target="#command-line-interface-cli"><span class="header-section-number">3.2</span> Command Line Interface (CLI)</a></li>
   </ul>
 </nav>
     </div>
@@ -148,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></h1>
 </div>
 
 
@@ -165,25 +178,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="globus" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="globus"><span class="header-section-number">2.1</span> Globus</h2>
+<section id="globus" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="globus"><span class="header-section-number">3.1</span> Globus</h2>
 <p>Globus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.</p>
-<section id="globus-local-storage-to-msi" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="globus-local-storage-to-msi"><span class="header-section-number">2.1.1</span> Globus: Local Storage to MSI</h3>
+<section id="globus-local-storage-to-msi" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="globus-local-storage-to-msi"><span class="header-section-number">3.1.1</span> Globus: Local Storage to MSI</h3>
 <p>I followed <a href="https://msi.umn.edu/our-resources/knowledge-base/file-transfer-faqs/how-do-i-use-globus-transfer-data-msi">these instructions</a> to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.</p>
 </section>
-<section id="globus-gems-to-msi" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="globus-gems-to-msi"><span class="header-section-number">2.1.2</span> Globus: GEMS to MSI</h3>
+<section id="globus-gems-to-msi" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="globus-gems-to-msi"><span class="header-section-number">3.1.2</span> Globus: GEMS to MSI</h3>
 <p>I found <a href="https://www.youtube.com/watch?v=eS1OChxrU2c">this tutorial here</a> but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.</p>
 <p>I have a help ticket in to hopefully resolve. #to-do</p>
 </section>
-<section id="globus-box-to-msi" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="globus-box-to-msi"><span class="header-section-number">2.1.3</span> Globus: Box to MSI</h3>
+<section id="globus-box-to-msi" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="globus-box-to-msi"><span class="header-section-number">3.1.3</span> Globus: Box to MSI</h3>
 <p>I have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.</p>
 </section>
 </section>
-<section id="command-line-interface-cli" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="command-line-interface-cli"><span class="header-section-number">2.2</span> Command Line Interface (CLI)</h2>
+<section id="command-line-interface-cli" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="command-line-interface-cli"><span class="header-section-number">3.2</span> Command Line Interface (CLI)</h2>
 <p>The other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don’t see any possibilities for that in the <a href="https://msi.umn.edu/our-resources/knowledge-base/file-transfer-faqs">MSI File Transfer Tutorial here</a>. Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).</p>
 
 
@@ -579,11 +592,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./msi-systems-access.html" class="pagination-link" aria-label="MSI Systems Access">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">MSI Systems Access</span></span>
+      <a href="./msi-python.html" class="pagination-link" aria-label="Accessing and Using Python on MSI Resources">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./singularity-docker-containers.html" class="pagination-link" aria-label="Working with Docker Images on MSI Resources">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

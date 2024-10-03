@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="N.A. Jelinski, I.H. Ainuddin">
-<meta name="dcterms.date" content="2024-10-03">
 
-<title>_aids-msi</title>
+<title>_aids-msi - 4&nbsp; Working with Docker Images on MSI Resources</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./msi-systems-access.html" rel="next">
+<link href="./data-transfer-msi.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./singularity-docker-containers.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -109,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -133,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./singularity-docker-containers.html" class="sidebar-item-text sidebar-link">
+  <a href="./singularity-docker-containers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></span></a>
   </div>
 </li>
@@ -147,10 +145,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
-  <ul class="collapse">
-  <li><a href="#msi-websites" id="toc-msi-websites" class="nav-link" data-scroll-target="#msi-websites">MSI Websites</a></li>
-  </ul></li>
+  <li><a href="#singularity-in-place-of-docker" id="toc-singularity-in-place-of-docker" class="nav-link active" data-scroll-target="#singularity-in-place-of-docker"><span class="header-section-number">4.1</span> Singularity in place of docker</a></li>
+  <li><a href="#building-an-sif-file-from-a-docker-image" id="toc-building-an-sif-file-from-a-docker-image" class="nav-link" data-scroll-target="#building-an-sif-file-from-a-docker-image"><span class="header-section-number">4.2</span> Building an sif file from a docker image</a></li>
   </ul>
 </nav>
     </div>
@@ -159,26 +155,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">_aids-msi</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>N.A. Jelinski, I.H. Ainuddin </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 3, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -188,15 +172,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1><p><img src="aksdb-badge-02.png" title="_aids-msi" class="quarto-cover-image img-fluid"></p>
-<p>This quarto book contains job aids for working with MSI resources. It is a distillation of MSI help resources and workflows implemented on MSI systems as a part of the Alaska Soil Data Bank project.</p>
-<section id="msi-websites" class="level2">
-<h2 class="anchored" data-anchor-id="msi-websites">MSI Websites</h2>
-
-
+<section id="singularity-in-place-of-docker" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="singularity-in-place-of-docker"><span class="header-section-number">4.1</span> Singularity in place of docker</h2>
+<p>Due to security concerns, MSI does not allow direct import and use of Docker images. Instead, you need to use Singularity, which, like docker, has a repository of images that can be accessed. These are .SIF files. You can build a .sif from an existing docker image, however. Then you can store it in your home directory.</p>
+<p>I used <a href="https://www.youtube.com/watch?v=uzBIDM_fAwU">the “Singularity and Containers” tutorial</a> (from 2020) to do this. There may be some outdated issues but it seemed to generally work.</p>
 </section>
+<section id="building-an-sif-file-from-a-docker-image" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="building-an-sif-file-from-a-docker-image"><span class="header-section-number">4.2</span> Building an sif file from a docker image</h2>
+<p>first load singularity</p>
+<pre class="shell"><code>module load singularity</code></pre>
+<p>then build an sif from a docker image. NOTE: need the docker image pointer. In this example I am using my <a href="https://hub.docker.com/layers/nicjelinski/wosis-latest-r-extract/v0.1/images/sha256-f8c4a1a202f7e7125ef11c4ceabc3d9c289e0645d340893481aecd8278d4e9b6?context=repo">docker image</a> which is nicjelinski/wosis-latest-r-extract:v0.1</p>
+<pre class="shell"><code>
+singularity run docker://nicjelinski/wosis-latest-r-extract:v0.1</code></pre>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -589,11 +578,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./data-transfer-msi.html" class="pagination-link" aria-label="Data Transfer to and from MSI compute platform">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./msi-systems-access.html" class="pagination-link" aria-label="MSI Systems Access">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">MSI Systems Access</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
