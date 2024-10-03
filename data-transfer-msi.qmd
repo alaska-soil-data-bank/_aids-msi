@@ -1,0 +1,18 @@
+# Data Transfer to and from MSI compute platform
+
+## Globus
+Globus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.
+
+### Globus: Local Storage to MSI
+I followed [these instructions](https://msi.umn.edu/our-resources/knowledge-base/file-transfer-faqs/how-do-i-use-globus-transfer-data-msi) to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.
+
+### Globus: GEMS to MSI
+I found [this tutorial here](https://www.youtube.com/watch?v=eS1OChxrU2c) but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.
+
+I have a help ticket in to hopefully resolve. #to-do
+
+### Globus: Box to MSI
+I have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.
+
+## Command Line Interface (CLI)
+The other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don't see any possibilities for that in the [MSI File Transfer Tutorial here](https://msi.umn.edu/our-resources/knowledge-base/file-transfer-faqs). Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).

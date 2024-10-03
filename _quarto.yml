@@ -1,0 +1,36 @@
+project:
+  type: book
+  # change output-dir to "docs" to publish to gh pages
+  output-dir: docs
+
+book:
+  title: "_aids-msi"
+  author: "N.A. Jelinski, I.H. Ainuddin"
+  date: "03-October-2024"
+  cover-image: "aksdb-badge-02.png"
+  
+  chapters:
+    - index.qmd
+    - msi-systems-access.qmd
+    - data-transfer-msi.qmd
+    #- deliverable1.qmd
+    #- deliverable2.qmd
+    #- deliverable3.qmd
+    #- authorship-guidelines.qmd
+    #- summary.qmd
+    #- references.qmd
+  #appendices:
+    #- co-authorship-template.qmd
+    #- data-use-and-sharing.qmd
+
+#bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
+

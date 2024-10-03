@@ -1,0 +1,41 @@
+# MSI Systems Access
+
+There are a couple of options for accessing MSI systems. You can ssh in or you can use Open On Demand.
+
+## ssh
+
+It appears that ssh is the best for basic file and maintenance tasks. One question I have however is what is the "default" compute resource you are using when you do this. It seems I can do basic operations in python on large datasets without much of a problem, however question about what happens when you try larger projects or more demanding models #to-do
+
+If you are simply doing work with file transfers or want to see what is on your Tier 1 storage, just ssh in. The simplest way to do this natively on a Mac is to use [OpenSSH](https://it.umn.edu/services-technologies/resources/use-secure-shell-ssh), which is pre-installed on Mac OSX. To do this, open the terminal application (Applications \> Utilities \> Terminal) and type:
+
+```shell 
+ssh jeli0026\@agate.msi.umn.edu\
+```
+
+My username (x500) is jeli0026, you would simply use your own. NOTE: if you are not on a umn campus network, then you will need to VPN in first, using the [Cisco AnyConnect Client](https://it.umn.edu/services-technologies/virtual-private-network-vpn). If you are on a UMN network, then you don't need the VPN.
+
+You will then be prompted to enter your password - this should be your UMN password. This will be followed by a Duo authentication request and options. Once you have approved the Duo authentication request, you are in.
+
+## MSI file structure, storage, etc
+
+### Home directory - Tier 1 storage?
+
+Once you are in, you will be in your default directory, which is (I believe) also your Tier 1 storage. As group PI, I currently have 1Tb of storage allotted for the entire group, and if you are one of my group members, you will be counting towards that total. To check where you are, just print working directory:
+
+```shell 
+pwd
+```
+
+My home directory is "/users/2/jeli0026".
+
+### Scratch - local and global?
+
+what is the difference? and how much storage #to-do - note I should make a table about this
+
+### Tier 2 Storage
+
+Unclear the use case for this, but here is the documentation: [MSI data retention and protection](https://msi.umn.edu/about-msi/policies/data-retention-and-protection)
+
+## Open On Demand for programmatic work or Jupyter notebook or Rstudio
+
+Go to [MSI Open On Demand](https://msi.umn.edu/about-msi-services/interactive-hpc/open-ondemand) and spin up a virtual machine (many options). Haven't explored this much yet. Be sure to leave Notebook Root empty so it defaults to the home directory. #to-do

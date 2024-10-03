@@ -1,0 +1,92 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "_aids-msi",
+    "section": "",
+    "text": "Preface\nThis quarto book contains job aids for working with MSI resources. It is a distillation of MSI help resources and workflows implemented on MSI systems as a part of the Alaska Soil Data Bank project.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#msi-websites",
+    "href": "index.html#msi-websites",
+    "title": "_aids-msi",
+    "section": "MSI Websites",
+    "text": "MSI Websites",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "msi-systems-access.html",
+    "href": "msi-systems-access.html",
+    "title": "1  MSI Systems Access",
+    "section": "",
+    "text": "1.1 ssh\nIt appears that ssh is the best for basic file and maintenance tasks. One question I have however is what is the “default” compute resource you are using when you do this. It seems I can do basic operations in python on large datasets without much of a problem, however question about what happens when you try larger projects or more demanding models #to-do\nIf you are simply doing work with file transfers or want to see what is on your Tier 1 storage, just ssh in. The simplest way to do this natively on a Mac is to use OpenSSH, which is pre-installed on Mac OSX. To do this, open the terminal application (Applications &gt; Utilities &gt; Terminal) and type:\nMy username (x500) is jeli0026, you would simply use your own. NOTE: if you are not on a umn campus network, then you will need to VPN in first, using the Cisco AnyConnect Client. If you are on a UMN network, then you don’t need the VPN.\nYou will then be prompted to enter your password - this should be your UMN password. This will be followed by a Duo authentication request and options. Once you have approved the Duo authentication request, you are in.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
+    ]
+  },
+  {
+    "objectID": "msi-systems-access.html#msi-file-structure-storage-etc",
+    "href": "msi-systems-access.html#msi-file-structure-storage-etc",
+    "title": "1  MSI Systems Access",
+    "section": "1.2 MSI file structure, storage, etc",
+    "text": "1.2 MSI file structure, storage, etc\n\n1.2.1 Home directory - Tier 1 storage?\nOnce you are in, you will be in your default directory, which is (I believe) also your Tier 1 storage. As group PI, I currently have 1Tb of storage allotted for the entire group, and if you are one of my group members, you will be counting towards that total. To check where you are, just print working directory:\npwd\nMy home directory is “/users/2/jeli0026”.\n\n\n1.2.2 Scratch - local and global?\nwhat is the difference? and how much storage #to-do - note I should make a table about this\n\n\n1.2.3 Tier 2 Storage\nUnclear the use case for this, but here is the documentation: MSI data retention and protection",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
+    ]
+  },
+  {
+    "objectID": "msi-systems-access.html#open-on-demand-for-programmatic-work-or-jupyter-notebook-or-rstudio",
+    "href": "msi-systems-access.html#open-on-demand-for-programmatic-work-or-jupyter-notebook-or-rstudio",
+    "title": "1  MSI Systems Access",
+    "section": "1.3 Open On Demand for programmatic work or Jupyter notebook or Rstudio",
+    "text": "1.3 Open On Demand for programmatic work or Jupyter notebook or Rstudio\nGo to MSI Open On Demand and spin up a virtual machine (many options). Haven’t explored this much yet. Be sure to leave Notebook Root empty so it defaults to the home directory. #to-do",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
+    ]
+  },
+  {
+    "objectID": "data-transfer-msi.html",
+    "href": "data-transfer-msi.html",
+    "title": "2  Data Transfer to and from MSI compute platform",
+    "section": "",
+    "text": "2.1 Globus\nGlobus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+    ]
+  },
+  {
+    "objectID": "data-transfer-msi.html#globus",
+    "href": "data-transfer-msi.html#globus",
+    "title": "2  Data Transfer to and from MSI compute platform",
+    "section": "",
+    "text": "2.1.1 Globus: Local Storage to MSI\nI followed these instructions to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.\n\n\n2.1.2 Globus: GEMS to MSI\nI found this tutorial here but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.\nI have a help ticket in to hopefully resolve. #to-do\n\n\n2.1.3 Globus: Box to MSI\nI have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+    ]
+  },
+  {
+    "objectID": "data-transfer-msi.html#command-line-interface-cli",
+    "href": "data-transfer-msi.html#command-line-interface-cli",
+    "title": "2  Data Transfer to and from MSI compute platform",
+    "section": "2.2 Command Line Interface (CLI)",
+    "text": "2.2 Command Line Interface (CLI)\nThe other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don’t see any possibilities for that in the MSI File Transfer Tutorial here. Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+    ]
+  },
+  {
+    "objectID": "msi-systems-access.html#ssh",
+    "href": "msi-systems-access.html#ssh",
+    "title": "1  MSI Systems Access",
+    "section": "",
+    "text": "ssh jeli0026\\@agate.msi.umn.edu\\",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
+    ]
+  }
+]
