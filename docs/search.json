@@ -40,11 +40,11 @@
     ]
   },
   {
-    "objectID": "msi-systems-access.html#msi-file-structure-storage-etc",
-    "href": "msi-systems-access.html#msi-file-structure-storage-etc",
+    "objectID": "msi-systems-access.html#msi-file-structure-storage-and-basic-navigation",
+    "href": "msi-systems-access.html#msi-file-structure-storage-and-basic-navigation",
     "title": "1  MSI Systems Access",
-    "section": "1.2 MSI file structure, storage, etc",
-    "text": "1.2 MSI file structure, storage, etc\n\n1.2.1 Home directory - Tier 1 storage?\nOnce you are in, you will be in your default directory, which is (I believe) also your Tier 1 storage. As group PI, I currently have 1Tb of storage allotted for the entire group, and if you are one of my group members, you will be counting towards that total. To check where you are, just print working directory:\npwd\nMy home directory is “/users/2/jeli0026”.\n\n\n1.2.2 Scratch - local and global?\nwhat is the difference? and how much storage #to-do - note I should make a table about this\n\n\n1.2.3 Tier 2 Storage\nUnclear the use case for this, but here is the documentation: MSI data retention and protection",
+    "section": "1.2 MSI file structure, storage, and basic navigation",
+    "text": "1.2 MSI file structure, storage, and basic navigation\n\n1.2.1 Home directory - Tier 1 storage?\nOnce you are in, you will be in your default directory, which is (I believe) also your Tier 1 storage. As group PI, I currently have 1Tb of storage allotted for the entire group, and if you are one of my group members, you will be counting towards that total. To check where you are, just print working directory:\npwd\nMy home directory is “/users/2/jeli0026”.\n\n\n1.2.2 Scratch - local and global?\nwhat is the difference? and how much storage #to-do - note I should make a table about this\n\n\n1.2.3 Tier 2 Storage\nUnclear the use case for this, but here is the documentation: MSI data retention and protection.\n\n\n1.2.4 Basic navigation\nYou can do basic navigation of files and folders using the command line, for example listing all files and folders in a directory:\nls -a\nOr changing directories - to go up:\n\ncd ..\n\nTo change directories within an existing directory:\n\ncd newdirectory\n\n…where newdirectory is the directory name you would like to change to. Al lot more basic commands in the Software Carpentry cheatsheet here.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
     ]
@@ -64,7 +64,7 @@
     "href": "msi-python.html",
     "title": "2  Accessing and Using Python on MSI Resources",
     "section": "",
-    "text": "2.1 Python in the Terminal\nThe MSI documentation for this is good. In the Python MSI page go to the “Documentation” tab and for general terminal use look at Linux. Here is what I have been doing:\nThen spin up the Python interpreter:\nNow you are ready to code!",
+    "text": "2.1 Python in the Terminal\nThe MSI documentation for this is good. In the Python MSI page go to the “Documentation” tab and for general terminal use look at Linux. Here is what I have been doing:\nThen spin up the Python interpreter:\nNow you are ready to code!\nTo end your session or exit the python interpreter just",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
     ]
@@ -74,7 +74,7 @@
     "href": "msi-python.html#python-in-the-terminal",
     "title": "2  Accessing and Using Python on MSI Resources",
     "section": "",
-    "text": "module load python3\n#this loads the [Anaconda Python 3 distribution](https://msi.umn.edu/our-resources/msi-software/anaconda) available through MSI\n\nipython",
+    "text": "module load python3\n#this loads the [Anaconda Python 3 distribution](https://msi.umn.edu/our-resources/msi-software/anaconda) available through MSI\n\nipython\n\n\n\nexit()",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
     ]

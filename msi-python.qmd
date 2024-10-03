@@ -19,6 +19,13 @@ ipython
 
 Now you are ready to code!
 
+To end your session or exit the python interpreter just
+
+```shell
+
+exit()
+```
+
 ## Python through Jupyter notebook on an MSI OnDemand Virtual Machine
 
 I need to work to understand more why packages and some operations are not loading successfully here. May be because you need to restart the kernel more often or things just aren't pointing to the right place. #to-do

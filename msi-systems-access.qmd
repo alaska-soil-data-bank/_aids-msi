@@ -16,7 +16,7 @@ My username (x500) is jeli0026, you would simply use your own. NOTE: if you are 
 
 You will then be prompted to enter your password - this should be your UMN password. This will be followed by a Duo authentication request and options. Once you have approved the Duo authentication request, you are in.
 
-## MSI file structure, storage, etc
+## MSI file structure, storage, and basic navigation
 
 ### Home directory - Tier 1 storage?
 
@@ -34,7 +34,34 @@ what is the difference? and how much storage #to-do - note I should make a table
 
 ### Tier 2 Storage
 
-Unclear the use case for this, but here is the documentation: [MSI data retention and protection](https://msi.umn.edu/about-msi/policies/data-retention-and-protection)
+Unclear the use case for this, but here is the documentation: [MSI data retention and protection](https://msi.umn.edu/about-msi/policies/data-retention-and-protection).
+
+### Basic navigation
+
+You can do basic navigation of files and folders using the command line, for example listing all files and folders in a directory:
+
+```shell
+ls -a
+```
+
+Or changing directories - to go up:
+
+```shell
+
+cd ..
+
+```
+
+To change directories within an existing directory:
+
+```shell
+
+cd newdirectory
+
+```
+
+...where *newdirectory* is the directory name you would like to change to. Al lot more basic commands in the [Software Carpentry cheatsheet here](https://rcc-uchicago.github.io/shell-intro/reference/).
+
 
 ## Open On Demand for programmatic work or Jupyter notebook or Rstudio
 
