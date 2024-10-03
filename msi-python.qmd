@@ -1,0 +1,25 @@
+# Accessing and Using Python on MSI Resources
+
+Here I am going to show how I have been successfully accessing and using Python on MSI resources through the terminal. I have yet to do anything with OpenOnDemand in Jupyter notebooks but will work on that soon.
+
+## Python in the Terminal
+
+The MSI documentation for this is good. In the [Python MSI page](https://msi.umn.edu/our-resources/msi-software/python) go to the "Documentation" tab and for general terminal use look at Linux. Here is what I have been doing:
+
+```shell
+module load python3
+#this loads the [Anaconda Python 3 distribution](https://msi.umn.edu/our-resources/msi-software/anaconda) available through MSI
+```
+
+Then spin up the Python interpreter:
+
+
+```shell
+ipython
+```
+
+Now you are ready to code!
+
+## Python through Jupyter notebook on an MSI OnDemand Virtual Machine
+
+I need to work to understand more why packages and some operations are not loading successfully here. May be because you need to restart the kernel more often or things just aren't pointing to the right place. #to-do
