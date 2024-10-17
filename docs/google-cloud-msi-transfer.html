@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>_aids-msi - 4&nbsp; Data Transfer to and from MSI compute platform</title>
+<title>_aids-msi - 5&nbsp; Transferring data from a Google Cloud Bucket to MSI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./google-cloud-msi-transfer.html" rel="next">
-<link href="./msi-python.html" rel="prev">
+<link href="./singularity-docker-containers.html" rel="next">
+<link href="./data-transfer-msi.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-transfer-msi.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./google-cloud-msi-transfer.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transferring data from a Google Cloud Bucket to MSI</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -132,13 +132,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-transfer-msi.html" class="sidebar-item-text sidebar-link active">
+  <a href="./data-transfer-msi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./google-cloud-msi-transfer.html" class="sidebar-item-text sidebar-link">
+  <a href="./google-cloud-msi-transfer.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transferring data from a Google Cloud Bucket to MSI</span></span></a>
   </div>
 </li>
@@ -158,13 +158,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#globus" id="toc-globus" class="nav-link active" data-scroll-target="#globus"><span class="header-section-number">4.1</span> Globus</a>
-  <ul class="collapse">
-  <li><a href="#globus-local-storage-to-msi" id="toc-globus-local-storage-to-msi" class="nav-link" data-scroll-target="#globus-local-storage-to-msi"><span class="header-section-number">4.1.1</span> Globus: Local Storage to MSI</a></li>
-  <li><a href="#globus-gems-to-msi" id="toc-globus-gems-to-msi" class="nav-link" data-scroll-target="#globus-gems-to-msi"><span class="header-section-number">4.1.2</span> Globus: GEMS to MSI</a></li>
-  <li><a href="#globus-box-to-msi" id="toc-globus-box-to-msi" class="nav-link" data-scroll-target="#globus-box-to-msi"><span class="header-section-number">4.1.3</span> Globus: Box to MSI</a></li>
-  </ul></li>
-  <li><a href="#command-line-interface-cli" id="toc-command-line-interface-cli" class="nav-link" data-scroll-target="#command-line-interface-cli"><span class="header-section-number">4.2</span> Command Line Interface (CLI)</a></li>
+  <li><a href="#installing-gcloud-cli" id="toc-installing-gcloud-cli" class="nav-link active" data-scroll-target="#installing-gcloud-cli"><span class="header-section-number">5.1</span> Installing gcloud CLI</a></li>
+  <li><a href="#initiating-file-transfers" id="toc-initiating-file-transfers" class="nav-link" data-scroll-target="#initiating-file-transfers"><span class="header-section-number">5.2</span> Initiating File Transfers</a></li>
+  <li><a href="#transferring-data-from-scratch.global-to-msi-tier-2" id="toc-transferring-data-from-scratch.global-to-msi-tier-2" class="nav-link" data-scroll-target="#transferring-data-from-scratch.global-to-msi-tier-2"><span class="header-section-number">5.3</span> Transferring data from scratch.global to MSI Tier 2</a></li>
   </ul>
 </nav>
     </div>
@@ -173,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transferring data from a Google Cloud Bucket to MSI</span></h1>
 </div>
 
 
@@ -190,26 +186,128 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="globus" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="globus"><span class="header-section-number">4.1</span> Globus</h2>
-<p>Globus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.</p>
-<section id="globus-local-storage-to-msi" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="globus-local-storage-to-msi"><span class="header-section-number">4.1.1</span> Globus: Local Storage to MSI</h3>
-<p>I followed <a href="https://msi.umn.edu/our-resources/knowledge-base/file-transfer-faqs/how-do-i-use-globus-transfer-data-msi">these instructions</a> to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.</p>
+<p>This documentation is for a specific problem I am attempting to solve. The covariates are stored in Timm Nawrocki’s UAA Google Cloud Storage bucket. The tools needed to effect this transfer are the gsutils tools in the Google Cloud CLI (command line interface) tools.</p>
+<section id="installing-gcloud-cli" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="installing-gcloud-cli"><span class="header-section-number">5.1</span> Installing gcloud CLI</h2>
+<p><a href="https://cloud.google.com/sdk?hl=en">gcloud SDK and CLI</a> includes the gcloud, gsutil, and bq command line tools. Of these, we will be using the gsutil tools. Navigate to the <a href="https://cloud.google.com/sdk/docs/install">Google Cloud SDK gcloud CLI install instructions</a> page. We are going to do this on an MSI system which is Linux based so be sure you are on the Linux instructions tab.</p>
+<ol type="1">
+<li><p>ssh in to MSI system (or I guess open on demand in terminal is fine too, but probably not preferred).</p></li>
+<li><p>I am going to do this within my global scratch (because there is more storage for a high volume of data and because it can just be easily deleted if necessary). So, navigate to my global scratch directory:</p></li>
+</ol>
+<pre class="shell"><code>scratch.global
+
+cd jeli0026</code></pre>
+<p>Now I am in my global scratch directory “/scratch.global/jeli0026”.</p>
+<ol start="3" type="1">
+<li>Follow the <a href="https://cloud.google.com/sdk/docs/install">instructions</a> to download the Linux CLI file to my scratch.global directory:</li>
+</ol>
+<pre class="shell"><code>curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz</code></pre>
+<ol start="4" type="1">
+<li>Open/extract the downloaded tarball:</li>
+</ol>
+<pre class="shell"><code>tar -xf google-cloud-cli-linux-x86_64.tar.gz</code></pre>
+<ol start="5" type="1">
+<li>Add the gcloud CLI to your path. Run the installation script from the root of the folder you extracted to using the following command:</li>
+</ol>
+<pre class="shell"><code>./google-cloud-sdk/install.sh</code></pre>
+<p>When run it will ask for some user prompts for what to do. I didn’t record the first prompt but apparently answered no “N”, to whatever it was (need to update in the future).</p>
+<p>Then this prompt happened:</p>
+<pre class="shell"><code>Here is what i did here: 
+───────────────┴───────────┘
+To install or remove components at your current SDK version [497.0.0], run:
+  $ gcloud components install COMPONENT_ID
+  $ gcloud components remove COMPONENT_ID
+
+To update your SDK installation to the latest version [497.0.0], run:
+  $ gcloud components update
+
+
+Modify profile to update your $PATH and enable shell command completion?
+
+Do you want to continue (Y/n)?  </code></pre>
+<p>I chose yes “Y”</p>
+<p>Then this happened:</p>
+<pre class="shell"><code>The Google Cloud SDK installer will now prompt you to update an rc file to bring the 
+Google Cloud CLIs into your environment.
+
+Enter a path to an rc file to update, or leave blank to use 
+[/users/2/jeli0026/.bashrc]:  </code></pre>
+<p>I left this blank</p>
+<ol start="6" type="1">
+<li>Open a new terminal so that the changes take effect. I opened a new terminal window, which required me to the ssh bak in to MSI. I then navigated back to my scratch.global directory.</li>
+</ol>
 </section>
-<section id="globus-gems-to-msi" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="globus-gems-to-msi"><span class="header-section-number">4.1.2</span> Globus: GEMS to MSI</h3>
-<p>I found <a href="https://www.youtube.com/watch?v=eS1OChxrU2c">this tutorial here</a> but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.</p>
-<p>I have a help ticket in to hopefully resolve. #to-do</p>
+<section id="initiating-file-transfers" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="initiating-file-transfers"><span class="header-section-number">5.2</span> Initiating File Transfers</h2>
+<p>Now, gcloud CLI is installed in my global scratch and I can use the tools to transfer fiels from any Google Cloud s3 buckets I have access to (via my google account) to my global scratch.</p>
+<ol type="1">
+<li>Initiate login authorization:</li>
+</ol>
+<pre class="shell"><code>gcloud auth login</code></pre>
+<p>This resulted in the following:</p>
+<pre class="shell"><code>Go to the following link in your browser, and complete the sign-in prompts:
+    https://accounts.google.com/o/oauth2/auth?response_type=code&amp;client_id=32555940559.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fauthcode.html&amp;scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&amp;state=UfyB6sxKehakuKWy0psVzx2AMkQaRx&amp;prompt=consent&amp;token_usage=remote&amp;access_type=offline&amp;code_challenge=VFldrf31Ur1fgqlo8IiRP01UwIIhoyN6UuKFi8ZfPmg&amp;code_challenge_method=xxxx
+
+Once finished, enter the verification code provided in your browser: </code></pre>
+<p>I copied and pasted the link into my browser (you will have a different link) and was prompted to sign in using my google account. After that I received a verification code. I then copied and pasted that verification code into the terminal prompt.</p>
+<p>I then received this message:</p>
+<pre class="shell"><code>You are now logged in as [jeli0026@umn.edu].
+Your current project is [None].  You can change this setting by running:
+  $ gcloud config set project PROJECT_ID</code></pre>
+<p>In this case I think it is telling me how to navigate to one of the buckets I have access to.</p>
+<ol start="2" type="1">
+<li>Navigating to bucket and inspecting structure/objects</li>
+</ol>
+<p>Here is how I listed all the files in Timm’s akveg-map Google Cloud bucket:</p>
+<pre class="shell"><code>gsutil ls gs://akveg-data/</code></pre>
+<p>NOTE: although on Google Cloud Console this bucket is called akveg-map, it appears that the actual name is akveg-data because akveg-map comes back as not found, but akveg-data is correct. You can verify that what you are seeing on the command line listing is correct by navigating to the web user interface for Google Cloud Console (https://console.cloud.google.com). Any organizations you have access to should be available in the pull down menu. You can then go to the hamburger menu on the left and navigate to cloud storage. From there you can use the user interface links to navigate through the directories and inspect the files. PS NOTE: Ah I see - the ORGANIZATION is called akveg-map, but the bucket itself currently housing the covariates is called akveg-data.</p>
+<p>If I want to inspect a subdirectory, for example, I would just do this:</p>
+<pre class="shell"><code>gsutil ls gs://akveg-data/covariates_v20240711/</code></pre>
+<ol start="3" type="1">
+<li>Using rsync to transfer files.</li>
+</ol>
+<p>Now we are going to use the gsutil tool rsync to transfer files. rsync is a “recursive” syncing utility. In this case recursive syncing means it can process all files and subdirectories in a given directory (instead of just the contents of the directory itself without subdirectories). rsync is a one way syncing from source to destination. The advantage of rsync utility rather than copy (cp) is that rsync will look for what is already in the destination directory and only copy what isn’t there (so if there are new files you don’t need to re-transfer everything).</p>
+<pre class="shell"><code>gsutil -m rsync -r gs://akveg-data/covariates_v20240711/ /scratch.global/jeli0026</code></pre>
+<p>NOTE: In the gsutil command you provided, the flags -m and -r have the following meanings:</p>
+<p>-m (multi-threaded/multi-processing): This flag tells gsutil to perform operations in parallel, meaning it can transfer multiple files simultaneously. This increases performance, especially for large datasets or directories with many files.</p>
+<p>-r (recursive): This flag tells gsutil to operate recursively, meaning it will process all files and subdirectories within the specified directory.</p>
+<p>ADDITIONAL NOTE: There are two arguments that must be in this order: SOURCE and DESTINATION</p>
+<p>This will transfer all data from the specified bucket and directory to the destination directory!</p>
 </section>
-<section id="globus-box-to-msi" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="globus-box-to-msi"><span class="header-section-number">4.1.3</span> Globus: Box to MSI</h3>
-<p>I have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.</p>
-</section>
-</section>
-<section id="command-line-interface-cli" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="command-line-interface-cli"><span class="header-section-number">4.2</span> Command Line Interface (CLI)</h2>
-<p>The other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don’t see any possibilities for that in the <a href="https://msi.umn.edu/our-resources/knowledge-base/file-transfer-faqs">MSI File Transfer Tutorial here</a>. Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).</p>
+<section id="transferring-data-from-scratch.global-to-msi-tier-2" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="transferring-data-from-scratch.global-to-msi-tier-2"><span class="header-section-number">5.3</span> Transferring data from scratch.global to MSI Tier 2</h2>
+<p>Since everything on scratch.global is private, I need to transfer to MSI Tier 2 to make this data available to others. First I need to make a bucket on MSI Tier 2 and set permissions. Then I will transfer the data into my bucket.</p>
+<ol type="1">
+<li>First, since when I did the file transfer it dumped all files straight into my global scratch I’m going to make a directory to house then. NOTE: you can avoid this in the future by making a directory within scratch and setting that as your destination.</li>
+</ol>
+<pre class="shell"><code>mkdir covariates_v20240711</code></pre>
+<ol start="2" type="1">
+<li>Now transfer all files with .tif extension into that folder:</li>
+</ol>
+<pre class="shell"><code>mv *.tif /scratch.global/jeli0026/covariates_v20240711</code></pre>
+<ol start="3" type="1">
+<li>Now use the <a href="https://msi.umn.edu/our-resources/knowledge-base/data-storage-faqs/how-do-i-use-second-tier-storage-command-line">Tier 2 s3cmd tool instructions</a> to create a new bucket on Tier 2 called aksdb_covars:</li>
+</ol>
+<pre class="shell"><code>s3cmd mb s3://aksdb-covars</code></pre>
+<p>NOTE: The bucket name can be between 3 and 63 characters long, and can contain only lower-case characters, numbers, periods, and dashes.</p>
+<p>Success!:</p>
+<pre class="shell"><code>Bucket 's3://aksdb-covars/' created</code></pre>
+<ol start="4" type="1">
+<li>Now use the sync tool to copy files into the bucket:</li>
+</ol>
+<pre class="shell"><code>s3cmd sync ./covariates_v20240711 s3://aksdb-covars</code></pre>
+<p>NOTE: should run this command from the higher level directory that your fiels are in (so in other words I should be in scratch.global/jeli0026 when I run the command). NOTE actually this should work fine with the ‘.’. I was trying before with the ‘~’ and this by default points to the home directory. You can also use the tilda to navigate directly to your home directory!!!!</p>
+<p>ADDITIONAL NOTE: yes this worked fine - you can really be from any directory. So: this would have worked fine too (or any adjusted version):</p>
+<pre class="shell"><code>s3cmd sync ~/scratch.global/jeli0026/covariates_v20240711 s3://aksdb-covars</code></pre>
+<ol start="5" type="1">
+<li>Set open permissions for the bucket so others can access it:</li>
+</ol>
+<p>To recursively make a bucket and all its contents publically readable by everyone:</p>
+<pre class="shell"><code>s3cmd setacl -P -r s3://aksdb-covars</code></pre>
+<ol start="6" type="1">
+<li>Additional s3cmd tools</li>
+</ol>
+<p>Note that you can find additional documentation for s3cmd <a href="https://s3tools.org/usage">here</a>: https://s3tools.org/usage</p>
 
 
 </section>
@@ -604,13 +702,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./msi-python.html" class="pagination-link" aria-label="Accessing and Using Python on MSI Resources">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span>
+      <a href="./data-transfer-msi.html" class="pagination-link" aria-label="Data Transfer to and from MSI compute platform">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./google-cloud-msi-transfer.html" class="pagination-link" aria-label="Transferring data from a Google Cloud Bucket to MSI">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transferring data from a Google Cloud Bucket to MSI</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./singularity-docker-containers.html" class="pagination-link" aria-label="Working with Docker Images on MSI Resources">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

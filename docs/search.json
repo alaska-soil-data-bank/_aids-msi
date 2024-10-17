@@ -34,7 +34,7 @@
     "href": "msi-systems-access.html#ssh",
     "title": "1  MSI Systems Access",
     "section": "",
-    "text": "ssh jeli0026\\@agate.msi.umn.edu\\",
+    "text": "ssh jeli0026@agate.msi.umn.edu",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
     ]
@@ -44,7 +44,7 @@
     "href": "msi-systems-access.html#msi-file-structure-storage-and-basic-navigation",
     "title": "1  MSI Systems Access",
     "section": "1.2 MSI file structure, storage, and basic navigation",
-    "text": "1.2 MSI file structure, storage, and basic navigation\n\n1.2.1 Home directory - Tier 1 storage?\nOnce you are in, you will be in your default directory, which is (I believe) also your Tier 1 storage. As group PI, I currently have 1Tb of storage allotted for the entire group, and if you are one of my group members, you will be counting towards that total. To check where you are, just print working directory:\npwd\nMy home directory is “/users/2/jeli0026”.\n\n\n1.2.2 Scratch - local and global?\nwhat is the difference? and how much storage #to-do - note I should make a table about this\n\n\n1.2.3 Tier 2 Storage\nUnclear the use case for this, but here is the documentation: MSI data retention and protection.\n\n\n1.2.4 Basic navigation\nYou can do basic navigation of files and folders using the command line, for example listing all files and folders in a directory:\nls -a\nOr changing directories - to go up:\n\ncd ..\n\nTo change directories within an existing directory:\n\ncd newdirectory\n\n…where newdirectory is the directory name you would like to change to. Al lot more basic commands in the Software Carpentry cheatsheet here.",
+    "text": "1.2 MSI file structure, storage, and basic navigation\n\n1.2.1 Home directory - Tier 1 storage?\nOnce you are in, you will be in your default directory, which is (I believe) also your Tier 1 storage. As group PI, I currently have 1Tb of storage allotted for the entire group, and if you are one of my group members, you will be counting towards that total. To check where you are, just print working directory:\npwd\nMy home directory is “/users/2/jeli0026”.\n\n\n1.2.2 Scratch - local and global?\nwhat is the difference? and how much storage #to-do - note I should make a table about this\n\n\n1.2.3 Tier 2 Storage\nUnclear the use case for this, but here is the documentation: MSI data retention and protection. Tier 2 is object storage (like Amazon or S3). You can use Globus to move data from your Tier 2 into your home directory (Tier 1) or into global scratch.\nhttps://msi.umn.edu/about-msi-services/data-storage/second-tier-storage https://msi.umn.edu/our-resources/knowledge-base/data-storage-faqs/how-do-i-use-globus-transfer-data-second-tier-storage-msi\nEveryone has 120Tb of storage at Tier 2.\n\n\n1.2.4 Basic navigation\nYou can do basic navigation of files and folders using the command line, for example listing all files and folders in a directory:\nls -a\nOr if you want to see the file size in megabytes for all files in a directory:\nls -l --block-size=MB\nOr changing directories - to go up:\n\ncd ..\nTo change directories within an existing directory:\n\ncd newdirectory\n…where newdirectory is the directory name you would like to change to. Al lot more basic commands in the Software Carpentry cheatsheet here.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>MSI Systems Access</span>"
     ]
@@ -60,83 +60,153 @@
     ]
   },
   {
+    "objectID": "msi-storage.html",
+    "href": "msi-storage.html",
+    "title": "2  Accessing and Utilizing Storage on MSI Systems",
+    "section": "",
+    "text": "2.1 Tier 1 Storage\nTier 1 storage is the default home directory and group storage on MSI and is equivalent to High Performance Storage. Any files (objects) stored in the following locations (I’m using my x500 here just as an example) are on Tier 1 storage:\n/users/2/jeli0026 - private storage\n/home/jeli0026/shared - shared with lab group members. accessed by typing “shared” when in the home directory\n/home/jeli0026/public - accessible by all MSI users. accessed by typing “public” when in the home directory\nThe default for Tier 1 storage is 150Gb. Group PIs can request more (up to 20Tb). I have currently requested and received 1Tb of storage on Tier 1 (as of 17OCT2024). All of the Tier one storage used by my group members also counts towards this quota.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Utilizing Storage on MSI Systems</span>"
+    ]
+  },
+  {
+    "objectID": "msi-storage.html#scatch-storage",
+    "href": "msi-storage.html#scatch-storage",
+    "title": "2  Accessing and Utilizing Storage on MSI Systems",
+    "section": "2.2 Scatch Storage",
+    "text": "2.2 Scatch Storage\nScratch storage is also High Performance Storage, but does not count against the PI group Tier 1 quota. Each user is allocated 40Tb on scratch storage. HOWEVER - scratch storage is not backed up and may be deleted after 30 days. SO scratch storage should only be used for active processes - there should always be copies of data on scratch storage elsewhere. ALSO&lt; scratch storage is by default private storage to the user (no shared permissions). There are two options for scratch storage:\n/scratch.global - this storage is accessible by all nodes - this should be the default use case for scratch storage. Users must make a directory for themselves when using global scratch (e.g. mkdir /scratch.global/$USER). Where $USER should be your x500 - then in that case, your global scratch is at /scratch.global/jeli0026 for example. You can access scratch.global by typing “scratch.global” or “scratch”\n/scratch.local - this storage is only accessible by a single node. You can access scratch.local by typing “scratch.local”.\nFrom Google AI generated search: The main difference between global scratch and local scratch at the Minnesota Supercomputing Institute (MSI) is that global scratch is shared and visible to all nodes, while local scratch is only connected to a single node:\nGlobal scratch\nA shared space with a 40 TB and 10 million file quota. Users must create a directory for themselves when using global scratch.\nLocal scratch\nA disk, SSD, or RAMdisk that is only visible and connected to a single node.\nHere are some other things to know about scratch storage at MSI:\nScratch storage is temporary and should not be used for data that is valuable or needs to be stored for more than 30 days. There is no backup or snapshots for local or global scratch storage. Access to scratch storage is requested like processors, memory, and GPUs. The amount of free capacity for each scratch type varies based on how much the shared resources are being used. Users can only transfer data for which they have normal filesystem read access. Users can only place new data in directories for which they have normal filesystem write access.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Utilizing Storage on MSI Systems</span>"
+    ]
+  },
+  {
+    "objectID": "msi-storage.html#tier-2-storage",
+    "href": "msi-storage.html#tier-2-storage",
+    "title": "2  Accessing and Utilizing Storage on MSI Systems",
+    "section": "2.3 Tier 2 Storage",
+    "text": "2.3 Tier 2 Storage\nMSI Tier 2 Storage is completely separate from Tier 1 and is an S3 bucket based system that you can access either from the command line or from Globus. Accessibility from the command line uses the s3cmd tool at MSI. All users have allocated 40Tb of storage on the Tier 2 system. Notably, the Tier 2 system is S3 storage buckets - you can set permissions to allow others to access.\nFrom that documentation, you can create your own bucket as follows:\nTo create your own bucket (AKA folder) on s3.msi.umn.edu, you can use the “mb” command (make bucket):\ns3cmd mb s3://mynewbucket",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Utilizing Storage on MSI Systems</span>"
+    ]
+  },
+  {
     "objectID": "msi-python.html",
     "href": "msi-python.html",
-    "title": "2  Accessing and Using Python on MSI Resources",
+    "title": "3  Accessing and Using Python on MSI Resources",
     "section": "",
-    "text": "2.1 Python in the Terminal\nThe MSI documentation for this is good. In the Python MSI page go to the “Documentation” tab and for general terminal use look at Linux. Here is what I have been doing:\nThen spin up the Python interpreter:\nNow you are ready to code!\nTo end your session or exit the python interpreter just",
+    "text": "3.1 Python in the Terminal\nThe MSI documentation for this is good. In the Python MSI page go to the “Documentation” tab and for general terminal use look at Linux. Here is what I have been doing:\nThen spin up the Python interpreter:\nNow you are ready to code!\nTo end your session or exit the python interpreter just",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
     ]
   },
   {
     "objectID": "msi-python.html#python-in-the-terminal",
     "href": "msi-python.html#python-in-the-terminal",
-    "title": "2  Accessing and Using Python on MSI Resources",
+    "title": "3  Accessing and Using Python on MSI Resources",
     "section": "",
     "text": "module load python3\n#this loads the [Anaconda Python 3 distribution](https://msi.umn.edu/our-resources/msi-software/anaconda) available through MSI\n\nipython\n\n\n\nexit()",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
     ]
   },
   {
     "objectID": "msi-python.html#python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine",
     "href": "msi-python.html#python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine",
-    "title": "2  Accessing and Using Python on MSI Resources",
-    "section": "2.2 Python through Jupyter notebook on an MSI OnDemand Virtual Machine",
-    "text": "2.2 Python through Jupyter notebook on an MSI OnDemand Virtual Machine\nI need to work to understand more why packages and some operations are not loading successfully here. May be because you need to restart the kernel more often or things just aren’t pointing to the right place. #to-do",
+    "title": "3  Accessing and Using Python on MSI Resources",
+    "section": "3.2 Python through Jupyter notebook on an MSI OnDemand Virtual Machine",
+    "text": "3.2 Python through Jupyter notebook on an MSI OnDemand Virtual Machine\nI need to work to understand more why packages and some operations are not loading successfully here. May be because you need to restart the kernel more often or things just aren’t pointing to the right place. #to-do",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Accessing and Using Python on MSI Resources</span>"
     ]
   },
   {
     "objectID": "data-transfer-msi.html",
     "href": "data-transfer-msi.html",
-    "title": "3  Data Transfer to and from MSI compute platform",
+    "title": "4  Data Transfer to and from MSI compute platform",
     "section": "",
-    "text": "3.1 Globus\nGlobus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.",
+    "text": "4.1 Globus\nGlobus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
     ]
   },
   {
     "objectID": "data-transfer-msi.html#globus",
     "href": "data-transfer-msi.html#globus",
-    "title": "3  Data Transfer to and from MSI compute platform",
+    "title": "4  Data Transfer to and from MSI compute platform",
     "section": "",
-    "text": "3.1.1 Globus: Local Storage to MSI\nI followed these instructions to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.\n\n\n3.1.2 Globus: GEMS to MSI\nI found this tutorial here but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.\nI have a help ticket in to hopefully resolve. #to-do\n\n\n3.1.3 Globus: Box to MSI\nI have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.",
+    "text": "4.1.1 Globus: Local Storage to MSI\nI followed these instructions to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.\n\n\n4.1.2 Globus: GEMS to MSI\nI found this tutorial here but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.\nI have a help ticket in to hopefully resolve. #to-do\n\n\n4.1.3 Globus: Box to MSI\nI have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
     ]
   },
   {
     "objectID": "data-transfer-msi.html#command-line-interface-cli",
     "href": "data-transfer-msi.html#command-line-interface-cli",
-    "title": "3  Data Transfer to and from MSI compute platform",
-    "section": "3.2 Command Line Interface (CLI)",
-    "text": "3.2 Command Line Interface (CLI)\nThe other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don’t see any possibilities for that in the MSI File Transfer Tutorial here. Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).",
+    "title": "4  Data Transfer to and from MSI compute platform",
+    "section": "4.2 Command Line Interface (CLI)",
+    "text": "4.2 Command Line Interface (CLI)\nThe other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don’t see any possibilities for that in the MSI File Transfer Tutorial here. Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Transfer to and from MSI compute platform</span>"
+    ]
+  },
+  {
+    "objectID": "google-cloud-msi-transfer.html",
+    "href": "google-cloud-msi-transfer.html",
+    "title": "5  Transferring data from a Google Cloud Bucket to MSI",
+    "section": "",
+    "text": "5.1 Installing gcloud CLI\ngcloud SDK and CLI includes the gcloud, gsutil, and bq command line tools. Of these, we will be using the gsutil tools. Navigate to the Google Cloud SDK gcloud CLI install instructions page. We are going to do this on an MSI system which is Linux based so be sure you are on the Linux instructions tab.\nNow I am in my global scratch directory “/scratch.global/jeli0026”.\nWhen run it will ask for some user prompts for what to do. I didn’t record the first prompt but apparently answered no “N”, to whatever it was (need to update in the future).\nThen this prompt happened:\nI chose yes “Y”\nThen this happened:\nI left this blank",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Transferring data from a Google Cloud Bucket to MSI</span>"
+    ]
+  },
+  {
+    "objectID": "google-cloud-msi-transfer.html#installing-gcloud-cli",
+    "href": "google-cloud-msi-transfer.html#installing-gcloud-cli",
+    "title": "5  Transferring data from a Google Cloud Bucket to MSI",
+    "section": "",
+    "text": "ssh in to MSI system (or I guess open on demand in terminal is fine too, but probably not preferred).\nI am going to do this within my global scratch (because there is more storage for a high volume of data and because it can just be easily deleted if necessary). So, navigate to my global scratch directory:\n\nscratch.global\n\ncd jeli0026\n\n\nFollow the instructions to download the Linux CLI file to my scratch.global directory:\n\ncurl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz\n\nOpen/extract the downloaded tarball:\n\ntar -xf google-cloud-cli-linux-x86_64.tar.gz\n\nAdd the gcloud CLI to your path. Run the installation script from the root of the folder you extracted to using the following command:\n\n./google-cloud-sdk/install.sh\n\n\nHere is what i did here: \n───────────────┴───────────┘\nTo install or remove components at your current SDK version [497.0.0], run:\n  $ gcloud components install COMPONENT_ID\n  $ gcloud components remove COMPONENT_ID\n\nTo update your SDK installation to the latest version [497.0.0], run:\n  $ gcloud components update\n\n\nModify profile to update your $PATH and enable shell command completion?\n\nDo you want to continue (Y/n)?  \n\n\nThe Google Cloud SDK installer will now prompt you to update an rc file to bring the \nGoogle Cloud CLIs into your environment.\n\nEnter a path to an rc file to update, or leave blank to use \n[/users/2/jeli0026/.bashrc]:  \n\n\nOpen a new terminal so that the changes take effect. I opened a new terminal window, which required me to the ssh bak in to MSI. I then navigated back to my scratch.global directory.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Transferring data from a Google Cloud Bucket to MSI</span>"
+    ]
+  },
+  {
+    "objectID": "google-cloud-msi-transfer.html#initiating-file-transfers",
+    "href": "google-cloud-msi-transfer.html#initiating-file-transfers",
+    "title": "5  Transferring data from a Google Cloud Bucket to MSI",
+    "section": "5.2 Initiating File Transfers",
+    "text": "5.2 Initiating File Transfers\nNow, gcloud CLI is installed in my global scratch and I can use the tools to transfer fiels from any Google Cloud s3 buckets I have access to (via my google account) to my global scratch.\n\nInitiate login authorization:\n\ngcloud auth login\nThis resulted in the following:\nGo to the following link in your browser, and complete the sign-in prompts:\n    https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fauthcode.html&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=UfyB6sxKehakuKWy0psVzx2AMkQaRx&prompt=consent&token_usage=remote&access_type=offline&code_challenge=VFldrf31Ur1fgqlo8IiRP01UwIIhoyN6UuKFi8ZfPmg&code_challenge_method=xxxx\n\nOnce finished, enter the verification code provided in your browser: \nI copied and pasted the link into my browser (you will have a different link) and was prompted to sign in using my google account. After that I received a verification code. I then copied and pasted that verification code into the terminal prompt.\nI then received this message:\nYou are now logged in as [jeli0026@umn.edu].\nYour current project is [None].  You can change this setting by running:\n  $ gcloud config set project PROJECT_ID\nIn this case I think it is telling me how to navigate to one of the buckets I have access to.\n\nNavigating to bucket and inspecting structure/objects\n\nHere is how I listed all the files in Timm’s akveg-map Google Cloud bucket:\ngsutil ls gs://akveg-data/\nNOTE: although on Google Cloud Console this bucket is called akveg-map, it appears that the actual name is akveg-data because akveg-map comes back as not found, but akveg-data is correct. You can verify that what you are seeing on the command line listing is correct by navigating to the web user interface for Google Cloud Console (https://console.cloud.google.com). Any organizations you have access to should be available in the pull down menu. You can then go to the hamburger menu on the left and navigate to cloud storage. From there you can use the user interface links to navigate through the directories and inspect the files. PS NOTE: Ah I see - the ORGANIZATION is called akveg-map, but the bucket itself currently housing the covariates is called akveg-data.\nIf I want to inspect a subdirectory, for example, I would just do this:\ngsutil ls gs://akveg-data/covariates_v20240711/\n\nUsing rsync to transfer files.\n\nNow we are going to use the gsutil tool rsync to transfer files. rsync is a “recursive” syncing utility. In this case recursive syncing means it can process all files and subdirectories in a given directory (instead of just the contents of the directory itself without subdirectories). rsync is a one way syncing from source to destination. The advantage of rsync utility rather than copy (cp) is that rsync will look for what is already in the destination directory and only copy what isn’t there (so if there are new files you don’t need to re-transfer everything).\ngsutil -m rsync -r gs://akveg-data/covariates_v20240711/ /scratch.global/jeli0026\nNOTE: In the gsutil command you provided, the flags -m and -r have the following meanings:\n-m (multi-threaded/multi-processing): This flag tells gsutil to perform operations in parallel, meaning it can transfer multiple files simultaneously. This increases performance, especially for large datasets or directories with many files.\n-r (recursive): This flag tells gsutil to operate recursively, meaning it will process all files and subdirectories within the specified directory.\nADDITIONAL NOTE: There are two arguments that must be in this order: SOURCE and DESTINATION\nThis will transfer all data from the specified bucket and directory to the destination directory!",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Transferring data from a Google Cloud Bucket to MSI</span>"
+    ]
+  },
+  {
+    "objectID": "google-cloud-msi-transfer.html#transferring-data-from-scratch.global-to-msi-tier-2",
+    "href": "google-cloud-msi-transfer.html#transferring-data-from-scratch.global-to-msi-tier-2",
+    "title": "5  Transferring data from a Google Cloud Bucket to MSI",
+    "section": "5.3 Transferring data from scratch.global to MSI Tier 2",
+    "text": "5.3 Transferring data from scratch.global to MSI Tier 2\nSince everything on scratch.global is private, I need to transfer to MSI Tier 2 to make this data available to others. First I need to make a bucket on MSI Tier 2 and set permissions. Then I will transfer the data into my bucket.\n\nFirst, since when I did the file transfer it dumped all files straight into my global scratch I’m going to make a directory to house then. NOTE: you can avoid this in the future by making a directory within scratch and setting that as your destination.\n\nmkdir covariates_v20240711\n\nNow transfer all files with .tif extension into that folder:\n\nmv *.tif /scratch.global/jeli0026/covariates_v20240711\n\nNow use the Tier 2 s3cmd tool instructions to create a new bucket on Tier 2 called aksdb_covars:\n\ns3cmd mb s3://aksdb-covars\nNOTE: The bucket name can be between 3 and 63 characters long, and can contain only lower-case characters, numbers, periods, and dashes.\nSuccess!:\nBucket 's3://aksdb-covars/' created\n\nNow use the sync tool to copy files into the bucket:\n\ns3cmd sync ./covariates_v20240711 s3://aksdb-covars\nNOTE: should run this command from the higher level directory that your fiels are in (so in other words I should be in scratch.global/jeli0026 when I run the command). NOTE actually this should work fine with the ‘.’. I was trying before with the ‘~’ and this by default points to the home directory. You can also use the tilda to navigate directly to your home directory!!!!\nADDITIONAL NOTE: yes this worked fine - you can really be from any directory. So: this would have worked fine too (or any adjusted version):\ns3cmd sync ~/scratch.global/jeli0026/covariates_v20240711 s3://aksdb-covars\n\nSet open permissions for the bucket so others can access it:\n\nTo recursively make a bucket and all its contents publically readable by everyone:\ns3cmd setacl -P -r s3://aksdb-covars\n\nAdditional s3cmd tools\n\nNote that you can find additional documentation for s3cmd here: https://s3tools.org/usage",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Transferring data from a Google Cloud Bucket to MSI</span>"
     ]
   },
   {
     "objectID": "singularity-docker-containers.html",
     "href": "singularity-docker-containers.html",
-    "title": "4  Working with Docker Images on MSI Resources",
+    "title": "6  Working with Docker Images on MSI Resources",
     "section": "",
-    "text": "4.1 Singularity in place of docker\nDue to security concerns, MSI does not allow direct import and use of Docker images. Instead, you need to use Singularity, which, like docker, has a repository of images that can be accessed. These are .SIF files. You can build a .sif from an existing docker image, however. Then you can store it in your home directory.\nI used the “Singularity and Containers” tutorial (from 2020) to do this. There may be some outdated issues but it seemed to generally work.",
+    "text": "6.1 Singularity in place of docker\nDue to security concerns, MSI does not allow direct import and use of Docker images. Instead, you need to use Singularity, which, like docker, has a repository of images that can be accessed. These are .SIF files. You can build a .sif from an existing docker image, however. Then you can store it in your home directory.\nI used the “Singularity and Containers” tutorial (from 2020) to do this. There may be some outdated issues but it seemed to generally work.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Working with Docker Images on MSI Resources</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Working with Docker Images on MSI Resources</span>"
     ]
   },
   {
     "objectID": "singularity-docker-containers.html#building-an-sif-file-from-a-docker-image",
     "href": "singularity-docker-containers.html#building-an-sif-file-from-a-docker-image",
-    "title": "4  Working with Docker Images on MSI Resources",
-    "section": "4.2 Building an sif file from a docker image",
-    "text": "4.2 Building an sif file from a docker image\nfirst load singularity\nmodule load singularity\nthen build an sif from a docker image. NOTE: need the docker image pointer. In this example I am using my docker image which is nicjelinski/wosis-latest-r-extract:v0.1\n\nsingularity run docker://nicjelinski/wosis-latest-r-extract:v0.1",
+    "title": "6  Working with Docker Images on MSI Resources",
+    "section": "6.2 Building an sif file from a docker image",
+    "text": "6.2 Building an sif file from a docker image\nfirst load singularity\nmodule load singularity\nthen build an sif from a docker image. NOTE: need the docker image pointer. In this example I am using my docker image which is nicjelinski/wosis-latest-r-extract:v0.1\n\nsingularity run docker://nicjelinski/wosis-latest-r-extract:v0.1",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Working with Docker Images on MSI Resources</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Working with Docker Images on MSI Resources</span>"
     ]
   }
 ]

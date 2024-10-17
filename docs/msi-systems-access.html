@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./msi-python.html" rel="next">
+<link href="./msi-storage.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -120,20 +120,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./msi-storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Utilizing Storage on MSI Systems</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./msi-python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-transfer-msi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./google-cloud-msi-transfer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transferring data from a Google Cloud Bucket to MSI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./singularity-docker-containers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></span></a>
   </div>
 </li>
     </ul>
@@ -185,7 +197,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="1.1" class="anchored" data-anchor-id="ssh"><span class="header-section-number">1.1</span> ssh</h2>
 <p>It appears that ssh is the best for basic file and maintenance tasks. One question I have however is what is the “default” compute resource you are using when you do this. It seems I can do basic operations in python on large datasets without much of a problem, however question about what happens when you try larger projects or more demanding models #to-do</p>
 <p>If you are simply doing work with file transfers or want to see what is on your Tier 1 storage, just ssh in. The simplest way to do this natively on a Mac is to use <a href="https://it.umn.edu/services-technologies/resources/use-secure-shell-ssh">OpenSSH</a>, which is pre-installed on Mac OSX. To do this, open the terminal application (Applications &gt; Utilities &gt; Terminal) and type:</p>
-<pre class="shell"><code>ssh jeli0026\@agate.msi.umn.edu\</code></pre>
+<pre class="shell"><code>ssh jeli0026@agate.msi.umn.edu</code></pre>
 <p>My username (x500) is jeli0026, you would simply use your own. NOTE: if you are not on a umn campus network, then you will need to VPN in first, using the <a href="https://it.umn.edu/services-technologies/virtual-private-network-vpn">Cisco AnyConnect Client</a>. If you are on a UMN network, then you don’t need the VPN.</p>
 <p>You will then be prompted to enter your password - this should be your UMN password. This will be followed by a Duo authentication request and options. Once you have approved the Duo authentication request, you are in.</p>
 </section>
@@ -203,20 +215,22 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tier-2-storage" class="level3" data-number="1.2.3">
 <h3 data-number="1.2.3" class="anchored" data-anchor-id="tier-2-storage"><span class="header-section-number">1.2.3</span> Tier 2 Storage</h3>
-<p>Unclear the use case for this, but here is the documentation: <a href="https://msi.umn.edu/about-msi/policies/data-retention-and-protection">MSI data retention and protection</a>.</p>
+<p>Unclear the use case for this, but here is the documentation: <a href="https://msi.umn.edu/about-msi/policies/data-retention-and-protection">MSI data retention and protection</a>. Tier 2 is object storage (like Amazon or S3). You can use Globus to move data from your Tier 2 into your home directory (Tier 1) or into global scratch.</p>
+<p>https://msi.umn.edu/about-msi-services/data-storage/second-tier-storage https://msi.umn.edu/our-resources/knowledge-base/data-storage-faqs/how-do-i-use-globus-transfer-data-second-tier-storage-msi</p>
+<p>Everyone has 120Tb of storage at Tier 2.</p>
 </section>
 <section id="basic-navigation" class="level3" data-number="1.2.4">
 <h3 data-number="1.2.4" class="anchored" data-anchor-id="basic-navigation"><span class="header-section-number">1.2.4</span> Basic navigation</h3>
 <p>You can do basic navigation of files and folders using the command line, for example listing all files and folders in a directory:</p>
 <pre class="shell"><code>ls -a</code></pre>
+<p>Or if you want to see the file size in megabytes for all files in a directory:</p>
+<pre class="shell"><code>ls -l --block-size=MB</code></pre>
 <p>Or changing directories - to go up:</p>
 <pre class="shell"><code>
-cd ..
-</code></pre>
+cd ..</code></pre>
 <p>To change directories within an existing directory:</p>
 <pre class="shell"><code>
-cd newdirectory
-</code></pre>
+cd newdirectory</code></pre>
 <p>…where <em>newdirectory</em> is the directory name you would like to change to. Al lot more basic commands in the <a href="https://rcc-uchicago.github.io/shell-intro/reference/">Software Carpentry cheatsheet here</a>.</p>
 </section>
 </section>
@@ -622,8 +636,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./msi-python.html" class="pagination-link" aria-label="Accessing and Using Python on MSI Resources">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./msi-storage.html" class="pagination-link" aria-label="Accessing and Utilizing Storage on MSI Systems">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Utilizing Storage on MSI Systems</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

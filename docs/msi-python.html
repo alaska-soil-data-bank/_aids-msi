@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>_aids-msi - 2&nbsp; Accessing and Using Python on MSI Resources</title>
+<title>_aids-msi - 3&nbsp; Accessing and Using Python on MSI Resources</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./data-transfer-msi.html" rel="next">
-<link href="./msi-systems-access.html" rel="prev">
+<link href="./msi-storage.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./msi-python.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./msi-python.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,20 +120,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./msi-storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Utilizing Storage on MSI Systems</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./msi-python.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-transfer-msi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./google-cloud-msi-transfer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transferring data from a Google Cloud Bucket to MSI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./singularity-docker-containers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Working with Docker Images on MSI Resources</span></span></a>
   </div>
 </li>
     </ul>
@@ -146,8 +158,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#python-in-the-terminal" id="toc-python-in-the-terminal" class="nav-link active" data-scroll-target="#python-in-the-terminal"><span class="header-section-number">2.1</span> Python in the Terminal</a></li>
-  <li><a href="#python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine" id="toc-python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine" class="nav-link" data-scroll-target="#python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine"><span class="header-section-number">2.2</span> Python through Jupyter notebook on an MSI OnDemand Virtual Machine</a></li>
+  <li><a href="#python-in-the-terminal" id="toc-python-in-the-terminal" class="nav-link active" data-scroll-target="#python-in-the-terminal"><span class="header-section-number">3.1</span> Python in the Terminal</a></li>
+  <li><a href="#python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine" id="toc-python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine" class="nav-link" data-scroll-target="#python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine"><span class="header-section-number">3.2</span> Python through Jupyter notebook on an MSI OnDemand Virtual Machine</a></li>
   </ul>
 </nav>
     </div>
@@ -156,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></h1>
 </div>
 
 
@@ -174,8 +186,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Here I am going to show how I have been successfully accessing and using Python on MSI resources through the terminal. I have yet to do anything with OpenOnDemand in Jupyter notebooks but will work on that soon.</p>
-<section id="python-in-the-terminal" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="python-in-the-terminal"><span class="header-section-number">2.1</span> Python in the Terminal</h2>
+<section id="python-in-the-terminal" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="python-in-the-terminal"><span class="header-section-number">3.1</span> Python in the Terminal</h2>
 <p>The MSI documentation for this is good. In the <a href="https://msi.umn.edu/our-resources/msi-software/python">Python MSI page</a> go to the “Documentation” tab and for general terminal use look at Linux. Here is what I have been doing:</p>
 <pre class="shell"><code>module load python3
 #this loads the [Anaconda Python 3 distribution](https://msi.umn.edu/our-resources/msi-software/anaconda) available through MSI</code></pre>
@@ -186,8 +198,8 @@ ul.task-list li input[type="checkbox"] {
 <pre class="shell"><code>
 exit()</code></pre>
 </section>
-<section id="python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine"><span class="header-section-number">2.2</span> Python through Jupyter notebook on an MSI OnDemand Virtual Machine</h2>
+<section id="python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="python-through-jupyter-notebook-on-an-msi-ondemand-virtual-machine"><span class="header-section-number">3.2</span> Python through Jupyter notebook on an MSI OnDemand Virtual Machine</h2>
 <p>I need to work to understand more why packages and some operations are not loading successfully here. May be because you need to restart the kernel more often or things just aren’t pointing to the right place. #to-do</p>
 
 
@@ -583,13 +595,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./msi-systems-access.html" class="pagination-link" aria-label="MSI Systems Access">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">MSI Systems Access</span></span>
+      <a href="./msi-storage.html" class="pagination-link" aria-label="Accessing and Utilizing Storage on MSI Systems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Utilizing Storage on MSI Systems</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./data-transfer-msi.html" class="pagination-link" aria-label="Data Transfer to and from MSI compute platform">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

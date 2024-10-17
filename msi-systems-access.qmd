@@ -8,8 +8,8 @@ It appears that ssh is the best for basic file and maintenance tasks. One questi
 
 If you are simply doing work with file transfers or want to see what is on your Tier 1 storage, just ssh in. The simplest way to do this natively on a Mac is to use [OpenSSH](https://it.umn.edu/services-technologies/resources/use-secure-shell-ssh), which is pre-installed on Mac OSX. To do this, open the terminal application (Applications \> Utilities \> Terminal) and type:
 
-```shell 
-ssh jeli0026\@agate.msi.umn.edu\
+``` shell
+ssh jeli0026@agate.msi.umn.edu
 ```
 
 My username (x500) is jeli0026, you would simply use your own. NOTE: if you are not on a umn campus network, then you will need to VPN in first, using the [Cisco AnyConnect Client](https://it.umn.edu/services-technologies/virtual-private-network-vpn). If you are on a UMN network, then you don't need the VPN.
@@ -22,7 +22,7 @@ You will then be prompted to enter your password - this should be your UMN passw
 
 Once you are in, you will be in your default directory, which is (I believe) also your Tier 1 storage. As group PI, I currently have 1Tb of storage allotted for the entire group, and if you are one of my group members, you will be counting towards that total. To check where you are, just print working directory:
 
-```shell 
+``` shell
 pwd
 ```
 
@@ -34,34 +34,41 @@ what is the difference? and how much storage #to-do - note I should make a table
 
 ### Tier 2 Storage
 
-Unclear the use case for this, but here is the documentation: [MSI data retention and protection](https://msi.umn.edu/about-msi/policies/data-retention-and-protection).
+Unclear the use case for this, but here is the documentation: [MSI data retention and protection](https://msi.umn.edu/about-msi/policies/data-retention-and-protection). Tier 2 is object storage (like Amazon or S3). You can use Globus to move data from your Tier 2 into your home directory (Tier 1) or into global scratch.
+
+https://msi.umn.edu/about-msi-services/data-storage/second-tier-storage https://msi.umn.edu/our-resources/knowledge-base/data-storage-faqs/how-do-i-use-globus-transfer-data-second-tier-storage-msi
+
+Everyone has 120Tb of storage at Tier 2.
 
 ### Basic navigation
 
 You can do basic navigation of files and folders using the command line, for example listing all files and folders in a directory:
 
-```shell
+``` shell
 ls -a
+```
+
+Or if you want to see the file size in megabytes for all files in a directory:
+
+``` shell
+ls -l --block-size=MB
 ```
 
 Or changing directories - to go up:
 
-```shell
+``` shell
 
 cd ..
-
 ```
 
 To change directories within an existing directory:
 
-```shell
+``` shell
 
 cd newdirectory
-
 ```
 
 ...where *newdirectory* is the directory name you would like to change to. Al lot more basic commands in the [Software Carpentry cheatsheet here](https://rcc-uchicago.github.io/shell-intro/reference/).
-
 
 ## Open On Demand for programmatic work or Jupyter notebook or Rstudio
 

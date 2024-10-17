@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>_aids-msi - 4&nbsp; Data Transfer to and from MSI compute platform</title>
+<title>_aids-msi - 2&nbsp; Accessing and Utilizing Storage on MSI Systems</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./google-cloud-msi-transfer.html" rel="next">
-<link href="./msi-python.html" rel="prev">
+<link href="./msi-python.html" rel="next">
+<link href="./msi-systems-access.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-transfer-msi.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./msi-storage.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Utilizing Storage on MSI Systems</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./msi-storage.html" class="sidebar-item-text sidebar-link">
+  <a href="./msi-storage.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Utilizing Storage on MSI Systems</span></span></a>
   </div>
 </li>
@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-transfer-msi.html" class="sidebar-item-text sidebar-link active">
+  <a href="./data-transfer-msi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></span></a>
   </div>
 </li>
@@ -158,13 +158,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#globus" id="toc-globus" class="nav-link active" data-scroll-target="#globus"><span class="header-section-number">4.1</span> Globus</a>
-  <ul class="collapse">
-  <li><a href="#globus-local-storage-to-msi" id="toc-globus-local-storage-to-msi" class="nav-link" data-scroll-target="#globus-local-storage-to-msi"><span class="header-section-number">4.1.1</span> Globus: Local Storage to MSI</a></li>
-  <li><a href="#globus-gems-to-msi" id="toc-globus-gems-to-msi" class="nav-link" data-scroll-target="#globus-gems-to-msi"><span class="header-section-number">4.1.2</span> Globus: GEMS to MSI</a></li>
-  <li><a href="#globus-box-to-msi" id="toc-globus-box-to-msi" class="nav-link" data-scroll-target="#globus-box-to-msi"><span class="header-section-number">4.1.3</span> Globus: Box to MSI</a></li>
-  </ul></li>
-  <li><a href="#command-line-interface-cli" id="toc-command-line-interface-cli" class="nav-link" data-scroll-target="#command-line-interface-cli"><span class="header-section-number">4.2</span> Command Line Interface (CLI)</a></li>
+  <li><a href="#tier-1-storage" id="toc-tier-1-storage" class="nav-link active" data-scroll-target="#tier-1-storage"><span class="header-section-number">2.1</span> Tier 1 Storage</a></li>
+  <li><a href="#scatch-storage" id="toc-scatch-storage" class="nav-link" data-scroll-target="#scatch-storage"><span class="header-section-number">2.2</span> Scatch Storage</a></li>
+  <li><a href="#tier-2-storage" id="toc-tier-2-storage" class="nav-link" data-scroll-target="#tier-2-storage"><span class="header-section-number">2.3</span> Tier 2 Storage</a></li>
   </ul>
 </nav>
     </div>
@@ -173,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Transfer to and from MSI compute platform</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accessing and Utilizing Storage on MSI Systems</span></h1>
 </div>
 
 
@@ -190,26 +186,34 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="globus" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="globus"><span class="header-section-number">4.1</span> Globus</h2>
-<p>Globus is the preferred and probably easiest way to transfer data to and from the MSI platform. This can (in theory) be used to transfer data from Box to MSI, from local storage to MSI, and from GEMS to MSI.</p>
-<section id="globus-local-storage-to-msi" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="globus-local-storage-to-msi"><span class="header-section-number">4.1.1</span> Globus: Local Storage to MSI</h3>
-<p>I followed <a href="https://msi.umn.edu/our-resources/knowledge-base/file-transfer-faqs/how-do-i-use-globus-transfer-data-msi">these instructions</a> to successfully set up a Globus endpoint for my local machine and then successfully used Globus to transfer data to my MSI home folder.</p>
+<p>There are essentially three storage options on MSI systems: Tier 1 storage (which includes the home directory, shared (open to all group users) and public (open to all MSI Users); Tier 2 storage (where you can create S3 buckets and set permissions for accessibility), and Global Scratch (which is deleted every 30 days).</p>
+<section id="tier-1-storage" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="tier-1-storage"><span class="header-section-number">2.1</span> Tier 1 Storage</h2>
+<p>Tier 1 storage is the default home directory and group storage on MSI and is equivalent to <a href="https://msi.umn.edu/about-msi-services/data-storage/high-performance-storage">High Performance Storage</a>. Any files (objects) stored in the following locations (I’m using my x500 here just as an example) are on Tier 1 storage:</p>
+<p>/users/2/jeli0026 - private storage</p>
+<p>/home/jeli0026/shared - shared with lab group members. accessed by typing “shared” when in the home directory</p>
+<p>/home/jeli0026/public - accessible by all MSI users. accessed by typing “public” when in the home directory</p>
+<p>The default for Tier 1 storage is 150Gb. Group PIs can request more (up to 20Tb). I have currently requested and received 1Tb of storage on Tier 1 (as of 17OCT2024). All of the Tier one storage used by my group members also counts towards this quota.</p>
 </section>
-<section id="globus-gems-to-msi" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="globus-gems-to-msi"><span class="header-section-number">4.1.2</span> Globus: GEMS to MSI</h3>
-<p>I found <a href="https://www.youtube.com/watch?v=eS1OChxrU2c">this tutorial here</a> but when I follow it I cannot find my GEMS endpoint, which I suppose should be gemsumn#gems_jeli0026_at_umn_edu.</p>
-<p>I have a help ticket in to hopefully resolve. #to-do</p>
+<section id="scatch-storage" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="scatch-storage"><span class="header-section-number">2.2</span> Scatch Storage</h2>
+<p><a href="https://msi.umn.edu/about-msi-services/data-storage/high-performance-storage/scratch-storage#:~:text=While%20global%20scratch%20is%20a,processors%2C%20memory%2C%20and%20GPUs.">Scratch storage</a> is also High Performance Storage, but does not count against the PI group Tier 1 quota. Each user is allocated 40Tb on scratch storage. HOWEVER - scratch storage is not backed up and may be deleted after 30 days. SO scratch storage should only be used for active processes - there should always be copies of data on scratch storage elsewhere. ALSO&lt; scratch storage is by default private storage to the user (no shared permissions). There are two options for scratch storage:</p>
+<p>/scratch.global - this storage is accessible by all nodes - this should be the default use case for scratch storage. Users must make a directory for themselves when using global scratch (e.g.&nbsp;mkdir /scratch.global/$USER). Where $USER should be your x500 - then in that case, your global scratch is at /scratch.global/jeli0026 for example. You can access scratch.global by typing “scratch.global” or “scratch”</p>
+<p>/scratch.local - this storage is only accessible by a single node. You can access scratch.local by typing “scratch.local”.</p>
+<p>From Google AI generated search: The main difference between global scratch and local scratch at the Minnesota Supercomputing Institute (MSI) is that global scratch is shared and visible to all nodes, while local scratch is only connected to a single node:</p>
+<p>Global scratch</p>
+<p>A shared space with a 40 TB and 10 million file quota. Users must create a directory for themselves when using global scratch.</p>
+<p>Local scratch</p>
+<p>A disk, SSD, or RAMdisk that is only visible and connected to a single node.</p>
+<p>Here are some other things to know about scratch storage at MSI:</p>
+<p>Scratch storage is temporary and should not be used for data that is valuable or needs to be stored for more than 30 days. There is no backup or snapshots for local or global scratch storage. Access to scratch storage is requested like processors, memory, and GPUs. The amount of free capacity for each scratch type varies based on how much the shared resources are being used. Users can only transfer data for which they have normal filesystem read access. Users can only place new data in directories for which they have normal filesystem write access.</p>
 </section>
-<section id="globus-box-to-msi" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="globus-box-to-msi"><span class="header-section-number">4.1.3</span> Globus: Box to MSI</h3>
-<p>I have a help ticket in for this one. Should be possible in theory but something needs to be enabled at the Enterprise level. #to-do.</p>
-</section>
-</section>
-<section id="command-line-interface-cli" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="command-line-interface-cli"><span class="header-section-number">4.2</span> Command Line Interface (CLI)</h2>
-<p>The other possibility is to do these transfers through the command line interface (according to Irf). I have not done this yet, but apparently it is possible. However I don’t see any possibilities for that in the <a href="https://msi.umn.edu/our-resources/knowledge-base/file-transfer-faqs">MSI File Transfer Tutorial here</a>. Irf says an scp protocol might work, but it looks to me like this is only from a local machine. Maybe also look into FileZilla? This is important because we need a connection to the Google Cloud Console bucket that Timm maintains in order to directly pull covariates instead of putting them local and then putting them up on MSI (although this is a workaround if necessary).</p>
+<section id="tier-2-storage" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="tier-2-storage"><span class="header-section-number">2.3</span> Tier 2 Storage</h2>
+<p>MSI <a href="https://msi.umn.edu/about-msi-services/data-storage/second-tier-storage">Tier 2 Storage</a> is completely separate from Tier 1 and is an S3 bucket based system that you can access either from the command line or from Globus. Accessibility from the command line uses the <a href="https://msi.umn.edu/our-resources/knowledge-base/data-storage-faqs/how-do-i-use-second-tier-storage-command-line">s3cmd</a> tool at MSI. All users have allocated 40Tb of storage on the Tier 2 system. Notably, the Tier 2 system is S3 storage buckets - you can set permissions to allow others to access.</p>
+<p>From that documentation, you can create your own bucket as follows:</p>
+<p>To create your own bucket (AKA folder) on s3.msi.umn.edu, you can use the “mb” command (make bucket):</p>
+<pre class="shell"><code>s3cmd mb s3://mynewbucket</code></pre>
 
 
 </section>
@@ -604,13 +608,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./msi-python.html" class="pagination-link" aria-label="Accessing and Using Python on MSI Resources">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span>
+      <a href="./msi-systems-access.html" class="pagination-link" aria-label="MSI Systems Access">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">MSI Systems Access</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./google-cloud-msi-transfer.html" class="pagination-link" aria-label="Transferring data from a Google Cloud Bucket to MSI">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transferring data from a Google Cloud Bucket to MSI</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./msi-python.html" class="pagination-link" aria-label="Accessing and Using Python on MSI Resources">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accessing and Using Python on MSI Resources</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,50 @@
+# Accessing and Utilizing Storage on MSI Systems
+
+There are essentially three storage options on MSI systems: Tier 1 storage (which includes the home directory, shared (open to all group users) and public (open to all MSI Users); Tier 2 storage (where you can create S3 buckets and set permissions for accessibility), and Global Scratch (which is deleted every 30 days).
+
+## Tier 1 Storage
+Tier 1 storage is the default home directory and group storage on MSI and is equivalent to [High Performance Storage](https://msi.umn.edu/about-msi-services/data-storage/high-performance-storage). Any files (objects) stored in the following locations (I'm using my x500 here just as an example) are on Tier 1 storage:
+
+/users/2/jeli0026 - private storage
+
+/home/jeli0026/shared - shared with lab group members. accessed by typing "shared" when in the home directory
+
+/home/jeli0026/public - accessible by all MSI users. accessed by typing "public" when in the home directory
+
+The default for Tier 1 storage is 150Gb. Group PIs can request more (up to 20Tb). I have currently requested and received 1Tb of storage on Tier 1 (as of 17OCT2024). All of the Tier one storage used by my group members also counts towards this quota.
+
+## Scatch Storage
+[Scratch storage](https://msi.umn.edu/about-msi-services/data-storage/high-performance-storage/scratch-storage#:~:text=While%20global%20scratch%20is%20a,processors%2C%20memory%2C%20and%20GPUs.) is also High Performance Storage, but does not count against the PI group Tier 1 quota. Each user is allocated 40Tb on scratch storage. HOWEVER - scratch storage is not backed up and may be deleted after 30 days. SO scratch storage should only be used for active processes - there should always be copies of data on scratch storage elsewhere. ALSO< scratch storage is by default private storage to the user (no shared permissions). There are two options for scratch storage:
+
+/scratch.global - this storage is accessible by all nodes - this should be the default use case for scratch storage. Users must make a directory for themselves when using global scratch (e.g. mkdir /scratch.global/$USER). Where $USER should be your x500 - then in that case, your global scratch is at /scratch.global/jeli0026 for example. You can access scratch.global by typing "scratch.global" or "scratch"
+
+/scratch.local - this storage is only accessible by a single node. You can access scratch.local by typing "scratch.local".
+
+From Google AI generated search: The main difference between global scratch and local scratch at the Minnesota Supercomputing Institute (MSI) is that global scratch is shared and visible to all nodes, while local scratch is only connected to a single node:
+
+Global scratch
+
+A shared space with a 40 TB and 10 million file quota. Users must create a directory for themselves when using global scratch.
+
+Local scratch
+
+A disk, SSD, or RAMdisk that is only visible and connected to a single node. 
+
+Here are some other things to know about scratch storage at MSI: 
+
+Scratch storage is temporary and should not be used for data that is valuable or needs to be stored for more than 30 days. There is no backup or snapshots for local or global scratch storage. Access to scratch storage is requested like processors, memory, and GPUs. 
+The amount of free capacity for each scratch type varies based on how much the shared resources are being used. Users can only transfer data for which they have normal filesystem read access. Users can only place new data in directories for which they have normal filesystem write access. 
+
+## Tier 2 Storage
+
+MSI [Tier 2 Storage ](https://msi.umn.edu/about-msi-services/data-storage/second-tier-storage) is completely separate from Tier 1 and is an S3 bucket based system that you can access either from the command line or from Globus. Accessibility from the command line uses the [s3cmd](https://msi.umn.edu/our-resources/knowledge-base/data-storage-faqs/how-do-i-use-second-tier-storage-command-line) tool at MSI. All users have allocated 40Tb of storage on the Tier 2 system. Notably, the Tier 2 system is S3 storage buckets - you can set permissions to allow others to access.
+
+From that documentation, you can create your own bucket as follows:
+
+To create your own bucket (AKA folder) on s3.msi.umn.edu, you can use the "mb" command (make bucket):
+
+```shell
+s3cmd mb s3://mynewbucket
+```
+
+

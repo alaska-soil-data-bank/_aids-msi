@@ -1,0 +1,194 @@
+# Transferring data from a Google Cloud Bucket to MSI
+
+This documentation is for a specific problem I am attempting to solve. The covariates are stored in Timm Nawrocki's UAA Google Cloud Storage bucket. The tools needed to effect this transfer are the gsutils tools in the Google Cloud CLI (command line interface) tools.
+
+## Installing gcloud CLI
+
+[gcloud SDK and CLI](https://cloud.google.com/sdk?hl=en) includes the gcloud, gsutil, and bq command line tools. Of these, we will be using the gsutil tools. Navigate to the [Google Cloud SDK gcloud CLI install instructions](https://cloud.google.com/sdk/docs/install) page. We are going to do this on an MSI system which is Linux based so be sure you are on the Linux instructions tab.
+
+1.  ssh in to MSI system (or I guess open on demand in terminal is fine too, but probably not preferred).
+
+2.  I am going to do this within my global scratch (because there is more storage for a high volume of data and because it can just be easily deleted if necessary). So, navigate to my global scratch directory:
+
+``` shell
+scratch.global
+
+cd jeli0026
+```
+
+Now I am in my global scratch directory "/scratch.global/jeli0026".
+
+3.  Follow the [instructions](https://cloud.google.com/sdk/docs/install) to download the Linux CLI file to my scratch.global directory:
+
+``` shell
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+```
+
+4.  Open/extract the downloaded tarball:
+
+``` shell
+tar -xf google-cloud-cli-linux-x86_64.tar.gz
+```
+
+5.  Add the gcloud CLI to your path. Run the installation script from the root of the folder you extracted to using the following command:
+
+``` shell
+./google-cloud-sdk/install.sh
+```
+
+When run it will ask for some user prompts for what to do. I didn't record the first prompt but apparently answered no "N", to whatever it was (need to update in the future).
+
+Then this prompt happened:
+
+``` shell
+Here is what i did here: 
+───────────────┴───────────┘
+To install or remove components at your current SDK version [497.0.0], run:
+  $ gcloud components install COMPONENT_ID
+  $ gcloud components remove COMPONENT_ID
+
+To update your SDK installation to the latest version [497.0.0], run:
+  $ gcloud components update
+
+
+Modify profile to update your $PATH and enable shell command completion?
+
+Do you want to continue (Y/n)?  
+```
+
+I chose yes "Y"
+
+Then this happened:
+
+``` shell
+The Google Cloud SDK installer will now prompt you to update an rc file to bring the 
+Google Cloud CLIs into your environment.
+
+Enter a path to an rc file to update, or leave blank to use 
+[/users/2/jeli0026/.bashrc]:  
+```
+
+I left this blank
+
+6.  Open a new terminal so that the changes take effect. I opened a new terminal window, which required me to the ssh bak in to MSI. I then navigated back to my scratch.global directory.
+
+## Initiating File Transfers
+
+Now, gcloud CLI is installed in my global scratch and I can use the tools to transfer fiels from any Google Cloud s3 buckets I have access to (via my google account) to my global scratch.
+
+1.  Initiate login authorization:
+
+``` shell
+gcloud auth login
+```
+
+This resulted in the following:
+
+``` shell
+Go to the following link in your browser, and complete the sign-in prompts:
+    https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fauthcode.html&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=UfyB6sxKehakuKWy0psVzx2AMkQaRx&prompt=consent&token_usage=remote&access_type=offline&code_challenge=VFldrf31Ur1fgqlo8IiRP01UwIIhoyN6UuKFi8ZfPmg&code_challenge_method=xxxx
+
+Once finished, enter the verification code provided in your browser: 
+```
+
+I copied and pasted the link into my browser (you will have a different link) and was prompted to sign in using my google account. After that I received a verification code. I then copied and pasted that verification code into the terminal prompt.
+
+I then received this message:
+
+``` shell
+You are now logged in as [jeli0026@umn.edu].
+Your current project is [None].  You can change this setting by running:
+  $ gcloud config set project PROJECT_ID
+```
+
+In this case I think it is telling me how to navigate to one of the buckets I have access to.
+
+2.  Navigating to bucket and inspecting structure/objects
+
+Here is how I listed all the files in Timm's akveg-map Google Cloud bucket:
+
+``` shell
+gsutil ls gs://akveg-data/
+```
+
+NOTE: although on Google Cloud Console this bucket is called akveg-map, it appears that the actual name is akveg-data because akveg-map comes back as not found, but akveg-data is correct. You can verify that what you are seeing on the command line listing is correct by navigating to the web user interface for Google Cloud Console (https://console.cloud.google.com). Any organizations you have access to should be available in the pull down menu. You can then go to the hamburger menu on the left and navigate to cloud storage. From there you can use the user interface links to navigate through the directories and inspect the files. PS NOTE: Ah I see - the ORGANIZATION is called akveg-map, but the bucket itself currently housing the covariates is called akveg-data.
+
+If I want to inspect a subdirectory, for example, I would just do this:
+
+``` shell
+gsutil ls gs://akveg-data/covariates_v20240711/
+```
+
+3.  Using rsync to transfer files.
+
+Now we are going to use the gsutil tool rsync to transfer files. rsync is a "recursive" syncing utility. In this case recursive syncing means it can process all files and subdirectories in a given directory (instead of just the contents of the directory itself without subdirectories). rsync is a one way syncing from source to destination. The advantage of rsync utility rather than copy (cp) is that rsync will look for what is already in the destination directory and only copy what isn't there (so if there are new files you don't need to re-transfer everything).
+
+``` shell
+gsutil -m rsync -r gs://akveg-data/covariates_v20240711/ /scratch.global/jeli0026
+```
+
+NOTE: In the gsutil command you provided, the flags -m and -r have the following meanings:
+
+-m (multi-threaded/multi-processing): This flag tells gsutil to perform operations in parallel, meaning it can transfer multiple files simultaneously. This increases performance, especially for large datasets or directories with many files.
+
+-r (recursive): This flag tells gsutil to operate recursively, meaning it will process all files and subdirectories within the specified directory.
+
+ADDITIONAL NOTE: There are two arguments that must be in this order: SOURCE and DESTINATION
+
+This will transfer all data from the specified bucket and directory to the destination directory!
+
+## Transferring data from scratch.global to MSI Tier 2
+
+Since everything on scratch.global is private, I need to transfer to MSI Tier 2 to make this data available to others. First I need to make a bucket on MSI Tier 2 and set permissions. Then I will transfer the data into my bucket.
+
+1.  First, since when I did the file transfer it dumped all files straight into my global scratch I'm going to make a directory to house then. NOTE: you can avoid this in the future by making a directory within scratch and setting that as your destination.
+
+``` shell
+mkdir covariates_v20240711
+```
+
+2.  Now transfer all files with .tif extension into that folder:
+
+``` shell
+mv *.tif /scratch.global/jeli0026/covariates_v20240711
+```
+
+3.  Now use the [Tier 2 s3cmd tool instructions](https://msi.umn.edu/our-resources/knowledge-base/data-storage-faqs/how-do-i-use-second-tier-storage-command-line) to create a new bucket on Tier 2 called aksdb_covars:
+
+``` shell
+s3cmd mb s3://aksdb-covars
+```
+
+NOTE: The bucket name can be between 3 and 63 characters long, and can contain only lower-case characters, numbers, periods, and dashes.
+
+Success!:
+
+``` shell
+Bucket 's3://aksdb-covars/' created
+```
+
+4.  Now use the sync tool to copy files into the bucket:
+
+``` shell
+s3cmd sync ./covariates_v20240711 s3://aksdb-covars
+```
+
+NOTE: should run this command from the higher level directory that your fiels are in (so in other words I should be in scratch.global/jeli0026 when I run the command). NOTE actually this should work fine with the '.'. I was trying before with the '\~' and this by default points to the home directory. You can also use the tilda to navigate directly to your home directory!!!!
+
+ADDITIONAL NOTE: yes this worked fine - you can really be from any directory. So: this would have worked fine too (or any adjusted version):
+
+``` shell
+s3cmd sync ~/scratch.global/jeli0026/covariates_v20240711 s3://aksdb-covars
+```
+
+5.  Set open permissions for the bucket so others can access it:
+
+To recursively make a bucket and all its contents publically readable by everyone:
+
+``` shell
+s3cmd setacl -P -r s3://aksdb-covars
+```
+
+6. Additional s3cmd tools
+
+Note that you can find additional documentation for s3cmd [here](https://s3tools.org/usage): https://s3tools.org/usage
