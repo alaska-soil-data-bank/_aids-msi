@@ -6,7 +6,7 @@ project:
 book:
   title: "_aids-msi"
   author: "N.A. Jelinski, I.H. Ainuddin"
-  date: "17-October-2024"
+  date: "22-October-2024"
   cover-image: "aksdb-badge-02.png"
   
   chapters:
@@ -36,5 +36,3 @@ format:
     documentclass: scrreprt
 
 editor: visual
-
-
